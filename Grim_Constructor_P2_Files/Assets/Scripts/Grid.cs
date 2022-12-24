@@ -12,6 +12,10 @@ public class Grid : MonoBehaviour
     private TextMesh[,] debugTextArray;
     private SpriteRenderer[,] greenSpriteArray;
     private Sprite square;
+
+    private LineRenderer[,] lineArray; 
+
+
     public Grid(int width, int height, float cellSize, Vector3 originPosition, Sprite square)
     {
         this.width = width;
@@ -20,7 +24,7 @@ public class Grid : MonoBehaviour
         this.originPosition = originPosition;
         this.square = square;
         gridArray = new int[width, height];
-
+        lineArray = new LineRenderer[width, height];
         //Array that holds all the text objects seen within the cells of the grid
         //debugTextArray = new TextMesh[width, height];
 
@@ -33,23 +37,24 @@ public class Grid : MonoBehaviour
             {
                 //Creates and adds a new text object to the text array
                 //debugTextArray[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 20, 
-                    //Color.white, TextAnchor.MiddleCenter);
+                //Color.white, TextAnchor.MiddleCenter);
                 //Debug.Log($"{x}, {y}");
                 //Debug.Log("Drawing Line\n");
 
                 //Draws out the grid
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y+1), Color.white,100f);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
+                lineArray[x, y] = UtilsClass.CreateNewLineRenderer(cellSize, null, GetWorldPosition(x,y), Color.white, 25);
+                //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y+1), Color.white,100f);
+                //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
 
                 //Create and add a new green square sprite at the cell's location
-                greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null, 
-                    GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, Color.yellow, 25, cellSize);
+                //greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null, 
+                  //  GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, Color.yellow, 25, cellSize);
 
 
             }
         //Draws grid edges
-        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
-        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
+        //Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
+        //Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
 
 
     }

@@ -9,12 +9,13 @@ public class TestUse : MonoBehaviour
 
     public int width, height, cellSize;
     public Vector3 origin = new Vector3(0,0,0);
-
+    public Sprite square;
+    /*
     public int roundedMousePos;
     public GameObject mouseSprite, mouseSprite2, orignalSprite; 
     public Vector3 mousePosition;
     public bool clicked;
-    public Sprite square;
+    
     public GameObject loadBar;
     LoadBar loadBarScript;
 
@@ -28,20 +29,21 @@ public class TestUse : MonoBehaviour
     bool builtSoundPlayed, completeSoundPlayed, particlePlayed;
 
     public ParticleSystem particleSystem, particleSystemUsed;
-
+    */
     // Start is called before the first frame update
     void Start()
     {
-        loadBarScript = loadBar.GetComponent<LoadBar>();
+        //loadBarScript = loadBar.GetComponent<LoadBar>();
         grid = new Grid(width, height, cellSize, origin, square);
-        clicked = false;
-        orignalSprite = mouseSprite;
-        originalMousePos = mousePos;
+        //clicked = false;
+        //orignalSprite = mouseSprite;
+        //originalMousePos = mousePos;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if(mousePos != originalMousePos)
         {
             
@@ -103,10 +105,11 @@ public class TestUse : MonoBehaviour
             Application.Quit();
         }
 
-
+        */
 
     }
 
+    /*
     public void TurnOffLoad()
     {
         if (loadBarScript.placed)
@@ -161,5 +164,5 @@ public class TestUse : MonoBehaviour
         mouseSprite.transform.position = new Vector3(x, y, 0)*cellSize + origin;
         grid.ChangeColor(x, y);
     }
-
+    */
 }

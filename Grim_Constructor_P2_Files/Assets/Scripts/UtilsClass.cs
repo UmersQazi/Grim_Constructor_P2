@@ -9,6 +9,8 @@ public static class UtilsClass
 {
     public const int sortingOrderDefault = 5000;
 
+
+    //TextMesh methods
     public static TextMesh CreateWorldText(string text, Transform parent = null, Vector3 localPosition = default(Vector3), 
         int fontSize = 40, UnityEngine.Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, 
         TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = sortingOrderDefault)
@@ -36,6 +38,7 @@ public static class UtilsClass
         return textMesh;
     }
 
+    //Sprite Renderer methods
     public static SpriteRenderer CreateNewSprite(Sprite square, Transform parent = null, Vector3 localPosition = default(Vector3),
         UnityEngine.Color ? color = null, int sortingOrder = sortingOrderDefault, float cellSize = default)
     {
@@ -61,6 +64,57 @@ public static class UtilsClass
         return spritePart;
     }
 
+
+    //Line Renderer methods
+    public static LineRenderer CreateNewLineRenderer(float cellSize, Transform parent = null, Vector3 localPosition = default(Vector3), UnityEngine.Color? color = null, 
+         int sortingOrder = sortingOrderDefault)
+    {
+        if (color == null) color = UnityEngine.Color.white;
+        return CreateNewLineRenderer(cellSize, parent, localPosition, (UnityEngine.Color)color, sortingOrder);
+    }
+
+    public static LineRenderer CreateNewLineRenderer(float cellSize, Transform parent, Vector3 localPosition, UnityEngine.Color color,
+         int sortingOrder)
+    {
+        
+        GameObject line = new GameObject("Line", typeof(LineRenderer));
+        LineRenderer linePart = line.GetComponent<LineRenderer>();
+        Material material = linePart.material;
+
+        //Setting color of line's material
+        material.color = color;
+        material.EnableKeyword("Emission");
+        material.SetColor("_EmissionColor", color);
+        linePart.material = material;
+
+        //Setting the width and positions of the line
+        linePart.startWidth = .05f;
+        linePart.endWidth = .05f;
+        linePart.positionCount = 2;
+        linePart.SetPosition(0, localPosition);
+        linePart.SetPosition(1, localPosition + (new Vector3(1,0,0) * cellSize));
+        
+        /*
+        Transform transform = line.transform;
+        transform.SetParent(parent, false);
+        transform.localPosition = localPosition;
+        transform.localScale *= cellSize;
+        */
+
+        //Setting line sorting order
+        linePart.sortingOrder = sortingOrder;
+
+        //Second, vertical line (NEED TO FIGURE OUT A WAY TO ADD THIS TO LINE ARRAY)
+        GameObject line2 = GameObject.Instantiate(line);
+        LineRenderer linePart2 = line2.GetComponent<LineRenderer>();
+        linePart2.SetPosition(0, localPosition);
+        linePart2.SetPosition(1, localPosition + (new Vector3(0, 1, 0)* cellSize));
+
+        return linePart;
+    }
+
+
+    //Mouse position methods
     public static Vector3 GetMouseWorldPosition()
     {
         Vector3 vector = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
