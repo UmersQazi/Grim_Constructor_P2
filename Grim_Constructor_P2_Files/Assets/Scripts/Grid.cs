@@ -26,7 +26,7 @@ public class Grid : MonoBehaviour
         gridArray = new int[width, height];
         lineArray = new LineRenderer[width, height];
         //Array that holds all the text objects seen within the cells of the grid
-        //debugTextArray = new TextMesh[width, height];
+        debugTextArray = new TextMesh[width, height];
 
         //Array that holds the green square sprites
         greenSpriteArray = new SpriteRenderer[width, height];
@@ -36,8 +36,8 @@ public class Grid : MonoBehaviour
             for(int y = 0; y < gridArray.GetLength(1); y++)
             {
                 //Creates and adds a new text object to the text array
-                //debugTextArray[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 20, 
-                //Color.white, TextAnchor.MiddleCenter);
+                debugTextArray[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 20, 
+                Color.white, TextAnchor.MiddleCenter);
                 //Debug.Log($"{x}, {y}");
                 //Debug.Log("Drawing Line\n");
 
