@@ -16,7 +16,7 @@ public class Grid : MonoBehaviour
     private LineRenderer[,] lineArray; 
 
 
-    public Grid(int width, int height, float cellSize, Vector3 originPosition, Sprite square)
+    public Grid(int width, int height, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color)
     {
         this.width = width;
         this.height = height;
@@ -42,7 +42,7 @@ public class Grid : MonoBehaviour
                 //Debug.Log("Drawing Line\n");
 
                 //Draws out the grid
-                lineArray[x, y] = UtilsClass.CreateNewLineRenderer(cellSize, null, GetWorldPosition(x,y), Color.white, 25);
+                lineArray[x, y] = UtilsClass.CreateNewLineRenderer(cellSize, null, GetWorldPosition(x,y), color, 25);
                 //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y+1), Color.white,100f);
                 //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
 
@@ -53,7 +53,7 @@ public class Grid : MonoBehaviour
 
             }
         //Draws grid edges
-        UtilsClass.CreateGridEdges(GetWorldPosition(width, 0), GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 25);
+        UtilsClass.CreateGridEdges(GetWorldPosition(width, 0), GetWorldPosition(0, height), GetWorldPosition(width, height), color, 25);
         //Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
         //Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
 

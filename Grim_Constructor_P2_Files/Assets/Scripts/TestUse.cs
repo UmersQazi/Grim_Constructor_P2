@@ -10,6 +10,8 @@ public class TestUse : MonoBehaviour
     public int width, height, cellSize;
     public Vector3 origin = new Vector3(0,0,0);
     public Sprite square;
+    [SerializeField] Color colorOfLines;
+
     /*
     public int roundedMousePos;
     public GameObject mouseSprite, mouseSprite2, orignalSprite; 
@@ -34,7 +36,7 @@ public class TestUse : MonoBehaviour
     void Start()
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
-        grid = new Grid(width, height, cellSize, origin, square);
+        grid = new Grid(width, height, cellSize, origin, square, colorOfLines);
         //clicked = false;
         //orignalSprite = mouseSprite;
         //originalMousePos = mousePos;
