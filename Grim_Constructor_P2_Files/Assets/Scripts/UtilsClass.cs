@@ -113,6 +113,36 @@ public static class UtilsClass
         return linePart;
     }
 
+    //Creates edges for the grid
+    public static void CreateGridEdges(Vector3 heightPos, Vector3 widthPos, Vector3 targetPos, UnityEngine.Color color, int sortingOrder)
+    {
+        GameObject line = new GameObject("Line", typeof(LineRenderer));
+        LineRenderer linePart = line.GetComponent<LineRenderer>();
+        Material material = linePart.material;
+
+        //Setting color of line's material
+        material.color = color;
+        material.EnableKeyword("Emission");
+        material.SetColor("_EmissionColor", color);
+        linePart.material = material;
+
+        linePart.startWidth = .05f;
+        linePart.endWidth = .05f;
+        linePart.positionCount = 2;
+        linePart.SetPosition(0, heightPos);
+        linePart.SetPosition(1, targetPos);
+
+        linePart.sortingOrder = sortingOrder;
+
+        //Second, vertical line (NEED TO FIGURE OUT A WAY TO ADD THIS TO LINE ARRAY)
+        GameObject line2 = GameObject.Instantiate(line);
+        LineRenderer linePart2 = line2.GetComponent<LineRenderer>();
+        linePart2.SetPosition(0, widthPos);
+        linePart2.SetPosition(1, targetPos);
+
+    }
+
+
 
     //Mouse position methods
     public static Vector3 GetMouseWorldPosition()

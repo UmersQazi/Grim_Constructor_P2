@@ -53,6 +53,7 @@ public class Grid : MonoBehaviour
 
             }
         //Draws grid edges
+        UtilsClass.CreateGridEdges(GetWorldPosition(width, 0), GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 25);
         //Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
         //Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
 

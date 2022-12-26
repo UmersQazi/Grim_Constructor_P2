@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 5
   height: 5
-  cellSize: 5
+  cellSize: 3
   origin: {x: 0, y: 0, z: 0}
   square: {fileID: 7482667652216324306, guid: 18f167e46c7ace74c80432fe4c4c83f7, type: 3}
 --- !u!4 &44663768
