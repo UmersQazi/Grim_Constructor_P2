@@ -7,6 +7,7 @@ public class Level01Manager : MonoBehaviour
 {
     public int goodDeeds = 105;
     [SerializeField] Text goodDeedsText;
+    public GameObject toolToDrag;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,21 @@ public class Level01Manager : MonoBehaviour
 
     public void ClickAndDrag(SpriteRenderer spriteToDrag)
     {
-
+        string name = spriteToDrag.name;
+        toolToDrag = new GameObject(name, typeof(SpriteRenderer));
+        switch (name)
+        {
+            case "Bridge A":
+                break;
+            case "Bridge B":
+                break;
+            case "Bridge C":
+                break;
+            case "Solider":
+                break;
+            default:
+                break;
+        }
     }
 
 
