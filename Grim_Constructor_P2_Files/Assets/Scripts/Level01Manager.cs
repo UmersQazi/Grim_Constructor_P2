@@ -19,4 +19,11 @@ public class Level01Manager : MonoBehaviour
     {
         goodDeedsText.text = goodDeeds.ToString();
     }
+
+    public void ClickAndDrag(SpriteRenderer spriteToDrag)
+    {
+
+    }
+
+
 }
