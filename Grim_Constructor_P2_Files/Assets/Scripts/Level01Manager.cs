@@ -21,10 +21,13 @@ public class Level01Manager : MonoBehaviour
         goodDeedsText.text = goodDeeds.ToString();
     }
 
-    public void ClickAndDrag(SpriteRenderer spriteToDrag)
+    public void ClickAndDrag(Sprite spriteToDrag)
     {
         string name = spriteToDrag.name;
         toolToDrag = new GameObject(name, typeof(SpriteRenderer));
+        SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = spriteToDrag;
+
         switch (name)
         {
             case "Bridge A":

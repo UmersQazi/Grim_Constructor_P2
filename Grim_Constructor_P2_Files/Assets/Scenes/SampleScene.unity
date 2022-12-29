@@ -158,6 +158,21 @@ MonoBehaviour:
   origin: {x: 0, y: 0, z: 0}
   square: {fileID: 7482667652216324306, guid: 18f167e46c7ace74c80432fe4c4c83f7, type: 3}
   colorOfLines: {r: 0.754717, g: 0.11747954, b: 0.6335303, a: 0}
+  level01Manager: {fileID: 0}
+  roundedMousePos: 0
+  mouseSprite: {fileID: 0}
+  mouseSprite2: {fileID: 0}
+  orignalSprite: {fileID: 0}
+  mousePosition: {x: 0, y: 0, z: 0}
+  clicked: 0
+  loadBar: {fileID: 0}
+  crateSprite: {fileID: 0}
+  villager: {fileID: 0}
+  moveSound: {fileID: 0}
+  buildingSound: {fileID: 0}
+  buildingCompleteSound: {fileID: 0}
+  particleSystem: {fileID: 0}
+  particleSystemUsed: {fileID: 0}
 --- !u!4 &44663768
 Transform:
   m_ObjectHideFlags: 0
@@ -280,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodDeeds: 105
   goodDeedsText: {fileID: 305056990}
+  toolToDrag: {fileID: 0}
 --- !u!4 &168863307
 Transform:
   m_ObjectHideFlags: 0
@@ -2023,8 +2039,8 @@ MonoBehaviour:
         m_MethodName: ClickAndDrag
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+          m_ObjectArgument: {fileID: 1055567757, guid: 6d5a0461c839a214d9136571058be33e, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

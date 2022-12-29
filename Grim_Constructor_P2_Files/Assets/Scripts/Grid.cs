@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    private int width, height;
+    private int width, height, fontSize;
     private int[,] gridArray;
     private float cellSize;
     private Vector3 originPosition;
@@ -16,10 +16,11 @@ public class Grid : MonoBehaviour
     private LineRenderer[,] lineArray; 
 
 
-    public Grid(int width, int height, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color)
+    public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color)
     {
         this.width = width;
         this.height = height;
+        this.fontSize = fontSize;
         this.cellSize = cellSize;
         this.originPosition = originPosition;
         this.square = square;
@@ -36,7 +37,7 @@ public class Grid : MonoBehaviour
             for(int y = 0; y < gridArray.GetLength(1); y++)
             {
                 //Creates and adds a new text object to the text array
-                debugTextArray[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 20, 
+                debugTextArray[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 5, 
                 Color.white, TextAnchor.MiddleCenter);
                 //Debug.Log($"{x}, {y}");
                 //Debug.Log("Drawing Line\n");

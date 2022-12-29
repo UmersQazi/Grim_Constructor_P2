@@ -7,7 +7,7 @@ public class TestUse : MonoBehaviour
 {
     private Grid grid;
 
-    public int width, height, cellSize;
+    public int width, height, fontSize, cellSize;
     public Vector3 origin = new Vector3(0,0,0);
     public Sprite square;
     [SerializeField] Color colorOfLines;
@@ -18,29 +18,33 @@ public class TestUse : MonoBehaviour
 
 
     public int roundedMousePos;
-    public GameObject mouseSprite, mouseSprite2, orignalSprite; 
+    public GameObject mouseSprite;//, mouseSprite2, orignalSprite; 
     public Vector3 mousePosition;
     public bool clicked;
-    
+
+    /*
     public GameObject loadBar;
     LoadBar loadBarScript;
 
+    
     public GameObject crateSprite;
     GameObject spriteToBuild;
     GameObject crateToEnd;
     public Villager villager;
+    
 
-    public AudioSource moveSound, buildingSound, buildingCompleteSound;
+    //public AudioSource moveSound, buildingSound, buildingCompleteSound;
+    */
     Vector3 mousePos, originalMousePos;
-    bool builtSoundPlayed, completeSoundPlayed, particlePlayed;
+    //bool builtSoundPlayed, completeSoundPlayed, particlePlayed;
 
-    public ParticleSystem particleSystem, particleSystemUsed;
+    //public ParticleSystem particleSystem, particleSystemUsed;
     
     // Start is called before the first frame update
     void Start()
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
-        grid = new Grid(width, height, cellSize, origin, square, colorOfLines);
+        grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines);
         //clicked = false;
         //orignalSprite = mouseSprite;
         originalMousePos = mousePos;
@@ -144,7 +148,7 @@ public class TestUse : MonoBehaviour
 
     }
 
-    
+    /*
     public void TurnOffLoad()
     {
         if (loadBarScript.placed)
@@ -173,8 +177,8 @@ public class TestUse : MonoBehaviour
             }
         }
     }
-
-
+    */
+    /*
     //Plays building animation
     public GameObject Building(Vector3 position)
     {
@@ -198,6 +202,7 @@ public class TestUse : MonoBehaviour
         loadBarAnim.Play("LoadBarAnim1");
         return newCrate;
     }
+    */
 
     //Moves mouse sprite
     public void MoveSprite()
