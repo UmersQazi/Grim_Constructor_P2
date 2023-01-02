@@ -152,27 +152,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe960aee9bb96fc4fa01674d6f28dc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 5
-  height: 5
-  cellSize: 3
-  origin: {x: 0, y: 0, z: 0}
+  width: 50
+  height: 50
+  fontSize: 2
+  cellSize: 1
+  origin: {x: 0, y: 1, z: 0}
   square: {fileID: 7482667652216324306, guid: 18f167e46c7ace74c80432fe4c4c83f7, type: 3}
   colorOfLines: {r: 0.754717, g: 0.11747954, b: 0.6335303, a: 0}
-  level01Manager: {fileID: 0}
+  level01Manager: {fileID: 168863306}
   roundedMousePos: 0
   mouseSprite: {fileID: 0}
-  mouseSprite2: {fileID: 0}
-  orignalSprite: {fileID: 0}
   mousePosition: {x: 0, y: 0, z: 0}
   clicked: 0
-  loadBar: {fileID: 0}
-  crateSprite: {fileID: 0}
-  villager: {fileID: 0}
-  moveSound: {fileID: 0}
-  buildingSound: {fileID: 0}
-  buildingCompleteSound: {fileID: 0}
-  particleSystem: {fileID: 0}
-  particleSystemUsed: {fileID: 0}
 --- !u!4 &44663768
 Transform:
   m_ObjectHideFlags: 0
@@ -411,8 +402,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283088920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72, y: 7.12, z: 0.06313626}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.62, y: 0.05, z: 0.06313626}
+  m_LocalScale: {x: 0.44035897, y: 0.44035897, z: 0.44035897}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 952469479}
@@ -710,8 +701,8 @@ MonoBehaviour:
         m_MethodName: ClickAndDrag
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+          m_ObjectArgument: {fileID: 240823461, guid: 32e642c26f356904eb9b34059e0443d0, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -908,7 +899,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.34, y: 4.94, z: -10}
+  m_LocalPosition: {x: 8, y: 2.96, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1906,8 +1897,8 @@ MonoBehaviour:
         m_MethodName: ClickAndDrag
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+          m_ObjectArgument: {fileID: 1846464904, guid: 4413ddfa0dc06c34f8726396d7d44823, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2362,8 +2353,8 @@ MonoBehaviour:
         m_MethodName: ClickAndDrag
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+          m_ObjectArgument: {fileID: -334325537, guid: 466405546041af846a27959de2e9dfe3, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

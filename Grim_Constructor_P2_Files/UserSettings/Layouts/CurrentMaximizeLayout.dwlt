@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 44954
+  controlID: 2348
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 44955
+  controlID: 2302
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 44956
+  controlID: 2303
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,7 +226,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6221ffffe021ffff5422ffff5423ffffec2cffff2c2efffff82effffa62fffff5e38ffffa838fffff838ffff4a39ffffce3bffff14d5ffff2cf1ffff26fbffff
+      m_ExpandedIDs: 26fbffff46600000786000008c600000ac600000f0600000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -309,8 +309,8 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -101, y: -26}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: -101, y: -26}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -320,9 +320,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -141, y: -173}
+      snapOffset: {x: -141, y: 149}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 3
+      snapCorner: 1
       id: unity-grid-and-snap-toolbar
       index: 1
       layout: 1
@@ -523,9 +523,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 226.66463, y: 117.2473, z: 0.7753816}
+    m_Target: {x: 13.846726, y: -0.7195347, z: -0.12761422}
     speed: 2
-    m_Value: {x: 226.66463, y: 117.2473, z: 0.7753816}
+    m_Value: {x: 13.846726, y: -0.7195347, z: -0.12761422}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -576,9 +576,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 116.45303
+    m_Target: 4.2537165
     speed: 2
-    m_Value: 116.45303
+    m_Value: 4.2537165
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -653,7 +653,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1280
     y: 629
-    width: 1466
+    width: 1464
     height: 362
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -685,9 +685,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ac5f0000
-    m_LastClickedID: 24492
-    m_ExpandedIDs: 00000000a05f0000
+    m_SelectedIDs: d8610000
+    m_LastClickedID: 25048
+    m_ExpandedIDs: 0000000062610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -715,7 +715,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a05f0000
+    m_ExpandedIDs: 0000000062610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -740,10 +740,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 14d5ffff
-    m_LastClickedInstanceID: -10988
+    m_SelectedInstanceIDs: fc600000
+    m_LastClickedInstanceID: 24828
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000d65f00008c820000ee830000
+    m_ExpandedInstanceIDs: c6230000d65f00008c820000ee830000608500002e61000032610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -793,7 +793,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1280
     y: 629
-    width: 1466
+    width: 1464
     height: 362
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -859,8 +859,8 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -57436
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: 24828
+  m_LastVerticalScrollValue: 264
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

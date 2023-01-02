@@ -27,7 +27,7 @@ public class Level01Manager : MonoBehaviour
         toolToDrag = new GameObject(name, typeof(SpriteRenderer));
         SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spriteToDrag;
-
+        toolToDrag.transform.localScale /= 5;
         switch (name)
         {
             case "Bridge A":
