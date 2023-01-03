@@ -8,6 +8,7 @@ public class Level01Manager : MonoBehaviour
     public int goodDeeds = 105;
     [SerializeField] Text goodDeedsText;
     public GameObject toolToDrag;
+    [SerializeField] float spriteDivider;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class Level01Manager : MonoBehaviour
         toolToDrag = new GameObject(name, typeof(SpriteRenderer));
         SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spriteToDrag;
-        toolToDrag.transform.localScale /= 5;
+        toolToDrag.transform.localScale /= spriteDivider;
         switch (name)
         {
             case "Bridge A":

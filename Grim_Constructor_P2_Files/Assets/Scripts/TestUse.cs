@@ -215,7 +215,8 @@ public class TestUse : MonoBehaviour
 
         //This rounded position is what lets the mouse sprite move across the scene in a rigid manner
         //If i need it off center, remove .5 increments
-        mouseSprite.transform.position = new Vector3(x, y, 0)*cellSize + origin;
+        if (x < width && y < height && x >= 1 && y >= 1)
+            mouseSprite.transform.position = new Vector3(x, y, 0)*cellSize + origin;
 
         //This changes the colors of the tiles the mouse sprite is hovering over
         //grid.ChangeColor(x, y);
