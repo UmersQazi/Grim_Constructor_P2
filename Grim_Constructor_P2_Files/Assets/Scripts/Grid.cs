@@ -13,10 +13,14 @@ public class Grid : MonoBehaviour
     private SpriteRenderer[,] greenSpriteArray;
     private Sprite square;
 
-    private LineRenderer[,] lineArray; 
+    private LineRenderer[,] lineArray;
+
+    private int squareSpriteSortingOrder;
+    private int toolSpriteSortingOrder;
 
 
-    public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color)
+    public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color
+        , int squareSpriteSortingOrder, int toolSpriteSortingOrder)
     {
         this.width = width;
         this.height = height;
@@ -24,6 +28,8 @@ public class Grid : MonoBehaviour
         this.cellSize = cellSize;
         this.originPosition = originPosition;
         this.square = square;
+        this.squareSpriteSortingOrder = squareSpriteSortingOrder;
+        this.toolSpriteSortingOrder = toolSpriteSortingOrder;
         gridArray = new int[width, height];
         lineArray = new LineRenderer[width, height];
         //Array that holds all the text objects seen within the cells of the grid

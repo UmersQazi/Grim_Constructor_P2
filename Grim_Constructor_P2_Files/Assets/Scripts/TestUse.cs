@@ -6,19 +6,25 @@ using UnityEngine.UIElements;
 public class TestUse : MonoBehaviour
 {
     private Grid grid;
-
+    [Header("Grid Specs")]
     public int width, height, fontSize, cellSize;
     public Vector3 origin = new Vector3(0,0,0);
     public Sprite square;
     [SerializeField] Color colorOfLines;
+
+    [Header("Sorting Orders")]
+    public int squareSpriteSortingOrder = 25;
+    public int toolSpriteSortingOrder = 26;
+
+
+    [Header("Level Manager")]
     public Level01Manager level01Manager;
-    GameObject toolToDrag;
-    
 
 
 
+    [Header("Mouse Options")]
     public int roundedMousePos;
-    public GameObject mouseSprite;//, mouseSprite2, orignalSprite; 
+    public GameObject mouseSprite;
     public Vector3 mousePosition;
     public bool clicked;
 
@@ -44,7 +50,7 @@ public class TestUse : MonoBehaviour
     void Start()
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
-        grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines);
+        grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, toolSpriteSortingOrder);
         //clicked = false;
         //orignalSprite = mouseSprite;
         originalMousePos = mousePos;
