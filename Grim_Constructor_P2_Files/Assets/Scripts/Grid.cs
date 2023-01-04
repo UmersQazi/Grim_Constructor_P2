@@ -48,8 +48,8 @@ public class Grid : MonoBehaviour
                 //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
 
                 //Create and add a new green square sprite at the cell's location
-                //greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null, 
-                  //  GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, Color.yellow, 25, cellSize);
+                greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null, 
+                    GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, Color.yellow, 25, cellSize);
 
 
             }
@@ -85,10 +85,10 @@ public class Grid : MonoBehaviour
         }
 
         //Changes the text of the cell to the new value
-        //debugTextArray[x, y].text = gridArray[x,y].ToString();
-        //debugTextArray[x, y-1].text = gridArray[x, y-1].ToString();
-        //debugTextArray[x-1, y].text = gridArray[x-1, y].ToString();
-        //debugTextArray[x-1, y-1].text = gridArray[x-1, y-1].ToString();
+        debugTextArray[x, y].text = gridArray[x,y].ToString();
+        debugTextArray[x, y-1].text = gridArray[x, y-1].ToString();
+        debugTextArray[x-1, y].text = gridArray[x-1, y].ToString();
+        debugTextArray[x-1, y-1].text = gridArray[x-1, y-1].ToString();
     }
 
     //Returns the position clicked on the mouse as the index on the gridArray

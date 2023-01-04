@@ -68,7 +68,13 @@ public class TestUse : MonoBehaviour
             MoveSprite();
 
 
-
+        if (Input.GetMouseButtonDown(0) && mouseSprite != null && grid.GetValue(mousePosition) == 0)
+        {
+            Debug.Log("Clicking");
+            grid.SetValue(mousePosition, 1);
+            level01Manager.toolToDrag = null;
+            //mouseSprite = null;
+        }
 
 
         //If user clicks and load animation not playing
@@ -219,7 +225,7 @@ public class TestUse : MonoBehaviour
             mouseSprite.transform.position = new Vector3(x, y, 0)*cellSize + origin;
 
         //This changes the colors of the tiles the mouse sprite is hovering over
-        //grid.ChangeColor(x, y);
+        grid.ChangeColor(x, y);
     }
     
 }
