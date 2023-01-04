@@ -24,7 +24,7 @@ public class TestUse : MonoBehaviour
 
     [Header("Mouse Options")]
     public int roundedMousePos;
-    public GameObject mouseSprite;
+    public GameObject mouseSprite, prevMouseSprite;
     public Vector3 mousePosition;
     public bool clicked;
 
@@ -54,12 +54,19 @@ public class TestUse : MonoBehaviour
         //clicked = false;
         //orignalSprite = mouseSprite;
         originalMousePos = mousePos;
+        prevMouseSprite = mouseSprite;
     }
 
     // Update is called once per frame
     void Update()
     {
         mouseSprite = level01Manager.toolToDrag;
+        prevMouseSprite = mouseSprite;
+        if(prevMouseSprite != mouseSprite)
+        {
+            CallManualTileClear();
+            prevMouseSprite = mouseSprite;
+        }
         if(mousePos != originalMousePos)
         {
             
@@ -79,6 +86,7 @@ public class TestUse : MonoBehaviour
             Debug.Log("Clicking");
             grid.SetValue(mousePosition, 1);
             level01Manager.toolToDrag = null;
+            CallManualTileClear();
             //mouseSprite = null;
         }
 
@@ -160,6 +168,12 @@ public class TestUse : MonoBehaviour
 
     }
 
+    public void CallManualTileClear()
+    {
+        grid.ManualTileClear();
+    }
+
+
     /*
     public void TurnOffLoad()
     {
@@ -228,10 +242,26 @@ public class TestUse : MonoBehaviour
         //This rounded position is what lets the mouse sprite move across the scene in a rigid manner
         //If i need it off center, remove .5 increments
         if (x < width && y < height && x >= 1 && y >= 1)
-            mouseSprite.transform.position = new Vector3(x, y, 0)*cellSize + origin;
+        {
+            mouseSprite.transform.position = new Vector3(x, y, 0) * cellSize + origin;
+            if (mouseSprite != null)
+                grid.ChangeColor(x, y, mouseSprite);
+            else
+                CallManualTileClear();
+        }
+
+        if(x >= width || y >= height || x < 1 || y < 1)
+        {
+            CallManualTileClear();
+        }
+        if(x < 1 && y < 1)
+        {
+            //CallManualTileClear();
+        }
+
 
         //This changes the colors of the tiles the mouse sprite is hovering over
-        grid.ChangeColor(x, y);
+        
     }
     
 }

@@ -159,6 +159,8 @@ MonoBehaviour:
   origin: {x: 0, y: 1, z: 0}
   square: {fileID: 7482667652216324306, guid: 18f167e46c7ace74c80432fe4c4c83f7, type: 3}
   colorOfLines: {r: 0.754717, g: 0.11747954, b: 0.6335303, a: 0}
+  squareSpriteSortingOrder: 25
+  toolSpriteSortingOrder: 26
   level01Manager: {fileID: 168863306}
   roundedMousePos: 0
   mouseSprite: {fileID: 0}
@@ -287,7 +289,7 @@ MonoBehaviour:
   goodDeeds: 105
   goodDeedsText: {fileID: 305056990}
   toolToDrag: {fileID: 0}
-  spriteDivider: 5
+  spriteDivider: 2
 --- !u!4 &168863307
 Transform:
   m_ObjectHideFlags: 0

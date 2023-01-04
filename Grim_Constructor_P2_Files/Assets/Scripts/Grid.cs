@@ -146,7 +146,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void ChangeColor(int x, int y)
+    public void ChangeColor(int x, int y, GameObject mouseSprite)
     {
         
         if (gridArray[x,y] == 0 && gridArray[x,y-1] == 0 && gridArray[x-1,y] == 0 && gridArray[x-1, y-1] == 0)
@@ -171,32 +171,40 @@ public class Grid : MonoBehaviour
             greenSpriteArray[x - 1, y - 1].color = Color.yellow;
         }
 
+
+        TileClear(x, y, mouseSprite);
         
         
 
-        for(int z = 0; z < greenSpriteArray.GetLength(0); z++)
+    }
+
+    public void TileClear(int x, int y, GameObject mouseSprite)
+    {
+        //if(mouseSprite == null)
+        //Goes through every square that is not selected and keeps its color to yellow
+        for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
         {
-            for(int w = 0; w < greenSpriteArray.GetLength(1); w++)
+            for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
             {
 
-                if(z!= x && z!= x-1 && w != y && w!= y - 1)
+                if (z != x && z != x - 1 && w != y && w != y - 1)
                 {
                     greenSpriteArray[z, w].color = Color.yellow;
                 }
 
-                if(z == x && w != y && w != y - 1)
+                if (z == x && w != y && w != y - 1)
                 {
                     greenSpriteArray[z, w].color = Color.yellow;
                 }
-                if(w == y && z != x-1 && z != x)
+                if (w == y && z != x - 1 && z != x)
                 {
                     greenSpriteArray[z, w].color = Color.yellow;
                 }
-                if(z == x-1 && w != y && w != y - 1)
+                if (z == x - 1 && w != y && w != y - 1)
                 {
                     greenSpriteArray[z, w].color = Color.yellow;
                 }
-                if (w == y-1 && z != x - 1 && z != x)
+                if (w == y - 1 && z != x - 1 && z != x)
                 {
                     greenSpriteArray[z, w].color = Color.yellow;
                 }
@@ -204,8 +212,18 @@ public class Grid : MonoBehaviour
 
             }
         }
-        
+    }
 
+    //This makes sure none of the tiles on the grid are still highlighted after tool placement
+    public void ManualTileClear()
+    {
+        for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
+        {
+            for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
+            {
+                greenSpriteArray[z, w].color = Color.yellow;
+            }
+        }
     }
 
 

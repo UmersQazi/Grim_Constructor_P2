@@ -9,7 +9,7 @@ public class Level01Manager : MonoBehaviour
     [SerializeField] Text goodDeedsText;
     public GameObject toolToDrag;
     [SerializeField] float spriteDivider;
-
+    [SerializeField] TestUse gridAccess;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +24,11 @@ public class Level01Manager : MonoBehaviour
 
     public void ClickAndDrag(Sprite spriteToDrag)
     {
+        if(toolToDrag != null)
+        {
+            Destroy(toolToDrag);
+            //gridAccess.CallManualTileClear();
+        }
         string name = spriteToDrag.name;
         toolToDrag = new GameObject(name, typeof(SpriteRenderer));
         SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
