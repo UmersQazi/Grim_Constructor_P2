@@ -19,7 +19,7 @@ public class Level01Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goodDeedsText.text = goodDeeds.ToString();
+        goodDeedsText.text = "Good Deeds:" + goodDeeds.ToString();
     }
 
     public void ClickAndDrag(Sprite spriteToDrag)
