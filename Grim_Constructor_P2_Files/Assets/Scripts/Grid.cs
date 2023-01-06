@@ -39,7 +39,7 @@ public class Grid : MonoBehaviour
         this.standardColor = standardColor;
         this.occupiedColor = occupiedColor;
         this.availableColor = availableColor;
-
+        
         gridArray = new int[width, height];
         lineArray = new LineRenderer[width, height];
         //Array that holds all the text objects seen within the cells of the grid

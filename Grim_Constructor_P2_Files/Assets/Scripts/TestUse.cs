@@ -63,6 +63,7 @@ public class TestUse : MonoBehaviour
         //orignalSprite = mouseSprite;
         originalMousePos = mousePos;
         prevMouseSprite = mouseSprite;
+        CallManualTileClear();
     }
 
     // Update is called once per frame
