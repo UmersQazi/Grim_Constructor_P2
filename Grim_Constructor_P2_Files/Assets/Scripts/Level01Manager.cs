@@ -10,6 +10,10 @@ public class Level01Manager : MonoBehaviour
     public GameObject toolToDrag;
     [SerializeField] float spriteDivider;
     [SerializeField] TestUse gridAccess;
+
+    [Header("Available Tools")]
+    [SerializeField] Tool[] toolsOfLevel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,15 +39,24 @@ public class Level01Manager : MonoBehaviour
         spriteRenderer.sprite = spriteToDrag;
         spriteRenderer.sortingOrder = 26;
         toolToDrag.transform.localScale /= spriteDivider;
+        string toolName;
         switch (name)
         {
-            case "Bridge A":
+            case "BridgeA1_0":
+                goodDeeds -= toolsOfLevel[0].cost;
+                toolsOfLevel[0].amount--;
                 break;
-            case "Bridge B":
+            case "BridgeB1_0":
+                goodDeeds -= toolsOfLevel[1].cost;
+                toolsOfLevel[1].amount--;
                 break;
-            case "Bridge C":
+            case "BridgeC1_0":
+                goodDeeds -= toolsOfLevel[2].cost;
+                toolsOfLevel[2].amount--;
                 break;
-            case "Solider":
+            case "Solider2_0":
+                 goodDeeds -= toolsOfLevel[3].cost;
+                toolsOfLevel[3].amount--;
                 break;
             default:
                 break;
