@@ -18,9 +18,14 @@ public class Grid : MonoBehaviour
     private int squareSpriteSortingOrder;
     private int toolSpriteSortingOrder;
 
+    private Color standardColor;
+    private Color occupiedColor;
+    private Color availableColor;
+
+
 
     public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color
-        , int squareSpriteSortingOrder, int toolSpriteSortingOrder)
+        , int squareSpriteSortingOrder, int toolSpriteSortingOrder, Color standardColor, Color occupiedColor, Color availableColor)
     {
         this.width = width;
         this.height = height;
@@ -30,6 +35,11 @@ public class Grid : MonoBehaviour
         this.square = square;
         this.squareSpriteSortingOrder = squareSpriteSortingOrder;
         this.toolSpriteSortingOrder = toolSpriteSortingOrder;
+
+        this.standardColor = standardColor;
+        this.occupiedColor = occupiedColor;
+        this.availableColor = availableColor;
+
         gridArray = new int[width, height];
         lineArray = new LineRenderer[width, height];
         //Array that holds all the text objects seen within the cells of the grid
@@ -55,7 +65,7 @@ public class Grid : MonoBehaviour
 
                 //Create and add a new green square sprite at the cell's location
                 greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null, 
-                    GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, Color.yellow, 25, cellSize);
+                    GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, standardColor, 25, cellSize);
 
 
             }
@@ -142,7 +152,7 @@ public class Grid : MonoBehaviour
     {
         foreach(SpriteRenderer g in greenSpriteArray)
         {
-            g.color = Color.yellow;
+            g.color = standardColor;
         }
     }
 
@@ -151,24 +161,24 @@ public class Grid : MonoBehaviour
         
         if (gridArray[x,y] == 0 && gridArray[x,y-1] == 0 && gridArray[x-1,y] == 0 && gridArray[x-1, y-1] == 0)
         {
-            greenSpriteArray[x, y].color = Color.green;
-            greenSpriteArray[x, y-1].color = Color.green;
-            greenSpriteArray[x-1, y].color = Color.green;
-            greenSpriteArray[x-1, y-1].color = Color.green;
+            greenSpriteArray[x, y].color = availableColor;
+            greenSpriteArray[x, y-1].color = availableColor;
+            greenSpriteArray[x-1, y].color = availableColor;
+            greenSpriteArray[x-1, y-1].color = availableColor;
         }
         else if(gridArray[x, y] == 1 || gridArray[x, y - 1] == 1 || gridArray[x - 1, y] == 1 || gridArray[x - 1, y - 1] == 1)
         {
-            greenSpriteArray[x, y].color = Color.red;
-            greenSpriteArray[x, y - 1].color = Color.red;
-            greenSpriteArray[x - 1, y].color = Color.red;
-            greenSpriteArray[x - 1, y - 1].color = Color.red;
+            greenSpriteArray[x, y].color = occupiedColor;
+            greenSpriteArray[x, y - 1].color = occupiedColor;
+            greenSpriteArray[x - 1, y].color = occupiedColor;
+            greenSpriteArray[x - 1, y - 1].color = occupiedColor;
         }
         else
         {
-            greenSpriteArray[x, y].color = Color.yellow;
-            greenSpriteArray[x, y - 1].color = Color.yellow;
-            greenSpriteArray[x - 1, y].color = Color.yellow;
-            greenSpriteArray[x - 1, y - 1].color = Color.yellow;
+            greenSpriteArray[x, y].color = standardColor;
+            greenSpriteArray[x, y - 1].color = standardColor;
+            greenSpriteArray[x - 1, y].color = standardColor;
+            greenSpriteArray[x - 1, y - 1].color = standardColor;
         }
 
 
@@ -180,6 +190,7 @@ public class Grid : MonoBehaviour
 
     public void TileClear(int x, int y, GameObject mouseSprite)
     {
+        
         //if(mouseSprite == null)
         //Goes through every square that is not selected and keeps its color to yellow
         for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
@@ -189,24 +200,24 @@ public class Grid : MonoBehaviour
 
                 if (z != x && z != x - 1 && w != y && w != y - 1)
                 {
-                    greenSpriteArray[z, w].color = Color.yellow;
+                    greenSpriteArray[z, w].color = standardColor;
                 }
 
                 if (z == x && w != y && w != y - 1)
                 {
-                    greenSpriteArray[z, w].color = Color.yellow;
+                    greenSpriteArray[z, w].color = standardColor;
                 }
                 if (w == y && z != x - 1 && z != x)
                 {
-                    greenSpriteArray[z, w].color = Color.yellow;
+                    greenSpriteArray[z, w].color = standardColor;
                 }
                 if (z == x - 1 && w != y && w != y - 1)
                 {
-                    greenSpriteArray[z, w].color = Color.yellow;
+                    greenSpriteArray[z, w].color = standardColor;
                 }
                 if (w == y - 1 && z != x - 1 && z != x)
                 {
-                    greenSpriteArray[z, w].color = Color.yellow;
+                    greenSpriteArray[z, w].color = standardColor;
                 }
 
 
@@ -217,11 +228,12 @@ public class Grid : MonoBehaviour
     //This makes sure none of the tiles on the grid are still highlighted after tool placement
     public void ManualTileClear()
     {
+        
         for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
         {
             for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
             {
-                greenSpriteArray[z, w].color = Color.yellow;
+                greenSpriteArray[z, w].color = standardColor;
             }
         }
     }

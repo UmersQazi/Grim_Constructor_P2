@@ -12,6 +12,13 @@ public class TestUse : MonoBehaviour
     public Sprite square;
     [SerializeField] Color colorOfLines;
 
+    [Header("Tile Colors")]
+    [SerializeField] Color standardColor;
+    [SerializeField] Color occupiedColor;
+    [SerializeField] Color availableColor;
+   
+
+
     [Header("Sorting Orders")]
     public int squareSpriteSortingOrder = 25;
     public int toolSpriteSortingOrder = 26;
@@ -50,7 +57,8 @@ public class TestUse : MonoBehaviour
     void Start()
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
-        grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, toolSpriteSortingOrder);
+        grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, 
+            toolSpriteSortingOrder, standardColor, occupiedColor, availableColor);
         //clicked = false;
         //orignalSprite = mouseSprite;
         originalMousePos = mousePos;

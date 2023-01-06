@@ -56,7 +56,9 @@ public static class UtilsClass
         transform.localScale *= cellSize;
         SpriteRenderer spritePart = sprite.GetComponent<SpriteRenderer>();
         spritePart.sprite = square;
+        color.a = .50f;
         spritePart.color = color;
+        
         spritePart.drawMode = SpriteDrawMode.Simple;
         spritePart.maskInteraction = SpriteMaskInteraction.None;
         spritePart.spriteSortPoint = SpriteSortPoint.Center;
