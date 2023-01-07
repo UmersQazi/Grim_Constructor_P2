@@ -90,10 +90,11 @@ public class TestUse : MonoBehaviour
             MoveSprite();
 
 
-        if (Input.GetMouseButtonDown(0) && mouseSprite != null && grid.GetValue(mousePosition) == 0)
+        if (Input.GetMouseButtonDown(0) && mouseSprite != null && grid.GetValue(mousePosition) == 0 && level01Manager.goodDeeds > 0)
         {
             Debug.Log("Clicking");
             grid.SetValue(mousePosition, 1);
+            level01Manager.ToolDeduction(level01Manager.toolToBePlaced);
             level01Manager.toolToDrag = null;
             CallManualTileClear();
             //mouseSprite = null;

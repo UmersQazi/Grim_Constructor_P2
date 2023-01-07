@@ -10,9 +10,15 @@ public class ToolDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        costText.text = toolOfButton.cost.ToString();
-        amountText.text = toolOfButton.amount.ToString();
+        
         //nameText.text = toolOfButton.name.ToString();
     }
+
+    private void Update()
+    {
+        costText.text = toolOfButton.cost.ToString();
+        amountText.text = toolOfButton.amount.ToString();
+    }
+
 
 }

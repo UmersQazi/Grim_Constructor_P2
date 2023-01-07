@@ -13,6 +13,7 @@ public class Level01Manager : MonoBehaviour
 
     [Header("Available Tools")]
     [SerializeField] Tool[] toolsOfLevel;
+    public Tool toolToBePlaced;
 
     // Start is called before the first frame update
     void Start()
@@ -28,39 +29,44 @@ public class Level01Manager : MonoBehaviour
 
     public void ClickAndDrag(Sprite spriteToDrag)
     {
-        if(toolToDrag != null)
+        if (goodDeeds > 0)
         {
-            Destroy(toolToDrag);
-            //gridAccess.CallManualTileClear();
+            if (toolToDrag != null)
+            {
+                Destroy(toolToDrag);
+                //gridAccess.CallManualTileClear();
+            }
+            string name = spriteToDrag.name;
+            toolToDrag = new GameObject(name, typeof(SpriteRenderer));
+            SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = spriteToDrag;
+            spriteRenderer.sortingOrder = 26;
+            toolToDrag.transform.localScale /= spriteDivider;
+            string toolName;
+            switch (name)
+            {
+                case "BridgeA1_0":
+                    toolToBePlaced = toolsOfLevel[0];
+                    break;
+                case "BridgeB1_0":
+                    toolToBePlaced = toolsOfLevel[1];
+                    break;
+                case "BridgeC1_0":
+                    toolToBePlaced = toolsOfLevel[2];
+                    break;
+                case "Solider2_0":
+                    toolToBePlaced = toolsOfLevel[3];
+                    break;
+                default:
+                    break;
+            }
         }
-        string name = spriteToDrag.name;
-        toolToDrag = new GameObject(name, typeof(SpriteRenderer));
-        SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = spriteToDrag;
-        spriteRenderer.sortingOrder = 26;
-        toolToDrag.transform.localScale /= spriteDivider;
-        string toolName;
-        switch (name)
-        {
-            case "BridgeA1_0":
-                goodDeeds -= toolsOfLevel[0].cost;
-                toolsOfLevel[0].amount--;
-                break;
-            case "BridgeB1_0":
-                goodDeeds -= toolsOfLevel[1].cost;
-                toolsOfLevel[1].amount--;
-                break;
-            case "BridgeC1_0":
-                goodDeeds -= toolsOfLevel[2].cost;
-                toolsOfLevel[2].amount--;
-                break;
-            case "Solider2_0":
-                 goodDeeds -= toolsOfLevel[3].cost;
-                toolsOfLevel[3].amount--;
-                break;
-            default:
-                break;
-        }
+    }
+
+    public void ToolDeduction(Tool toolToPlace)
+    {
+        goodDeeds -= toolToPlace.cost;
+        toolToPlace.amount--;
     }
 
 
