@@ -374,12 +374,15 @@ MonoBehaviour:
   goodDeedsText: {fileID: 305056990}
   toolToDrag: {fileID: 0}
   spriteDivider: 2
-  gridAccess: {fileID: 0}
+  gridAccess: {fileID: 44663767}
   toolsOfLevel:
   - {fileID: 11400000, guid: 43302df4f48073e4c8595a6209ce229b, type: 2}
   - {fileID: 11400000, guid: be97e386775662140b11a752cd331b3d, type: 2}
   - {fileID: 11400000, guid: d169377e918558943852df59a0910744, type: 2}
   - {fileID: 11400000, guid: efe092917420fe343927e342a4004ee2, type: 2}
+  toolAmountsInLevel: 
+  toolToBePlaced: {fileID: 0}
+  toolAmountIndex: 0
 --- !u!4 &168863307
 Transform:
   m_ObjectHideFlags: 0
@@ -1898,6 +1901,7 @@ MonoBehaviour:
   toolOfButton: {fileID: 11400000, guid: be97e386775662140b11a752cd331b3d, type: 2}
   costText: {fileID: 1426375462}
   amountText: {fileID: 671184528}
+  levelManager: {fileID: 168863306}
 --- !u!1 &1003250769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,6 +2034,7 @@ MonoBehaviour:
   toolOfButton: {fileID: 11400000, guid: d169377e918558943852df59a0910744, type: 2}
   costText: {fileID: 658196596}
   amountText: {fileID: 672536258}
+  levelManager: {fileID: 168863306}
 --- !u!1 &1099554520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,6 +2741,7 @@ MonoBehaviour:
   toolOfButton: {fileID: 11400000, guid: 43302df4f48073e4c8595a6209ce229b, type: 2}
   costText: {fileID: 1802853161}
   amountText: {fileID: 158649704}
+  levelManager: {fileID: 168863306}
 --- !u!1 &1537557411
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2889,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: x1
+  m_Text: 1
 --- !u!222 &1652938028
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3321,3 +3327,4 @@ MonoBehaviour:
   toolOfButton: {fileID: 11400000, guid: efe092917420fe343927e342a4004ee2, type: 2}
   costText: {fileID: 809092705}
   amountText: {fileID: 1652938027}
+  levelManager: {fileID: 168863306}
