@@ -9,7 +9,7 @@ public class Level01Manager : MonoBehaviour
 {
     public int goodDeeds = 105;
     [SerializeField] Text goodDeedsText;
-    public GameObject toolToDrag;
+    public GameObject toolSprite;
     [SerializeField] float spriteDivider;
     [SerializeField] TestUse gridAccess;
 
@@ -41,45 +41,53 @@ public class Level01Manager : MonoBehaviour
     {
         if (goodDeeds > 0)
         {
-            if (toolToDrag != null)
+            if (toolSprite != null)
             {
-                Destroy(toolToDrag);
+                Destroy(toolSprite);
                 //gridAccess.CallManualTileClear();
             }
             string name = spriteToDrag.name;
-            toolToDrag = new GameObject(name, typeof(SpriteRenderer));
-            SpriteRenderer spriteRenderer = toolToDrag.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = spriteToDrag;
-            spriteRenderer.sortingOrder = 26;
-            toolToDrag.transform.localScale /= spriteDivider;
-            string toolName;
+            
             switch (name)
             {
                 case "BridgeA1_0":
-                    if (toolAmountsInLevel[0] > 0 )//&& (toolsOfLevel[0].cost-goodDeeds) > 0)
-                        toolToBePlaced = toolsOfLevel[0];
+                    ToolSpriteCreator(name, 0, spriteToDrag);
                     break;
                 case "BridgeB1_0":
-                    if (toolAmountsInLevel[1] > 0 )//&& (toolsOfLevel[1].cost - goodDeeds) > 0)
-                        toolToBePlaced = toolsOfLevel[1];
+                    ToolSpriteCreator(name, 1, spriteToDrag);
                     break;
                 case "BridgeC1_0":
-                    if (toolAmountsInLevel[2] > 0)//&& (toolsOfLevel[2].cost - goodDeeds) > 0)
-                    {
-                        Debug.Log(toolAmountsInLevel[2]);
-                        toolToBePlaced = toolsOfLevel[2];
-                    }else
-                        toolToBePlaced = null;
+                    ToolSpriteCreator(name, 2, spriteToDrag);
                     break;
                 case "Soldier2_0":
-                    if (toolAmountsInLevel[3] > 0 )//&& (toolsOfLevel[3].cost - goodDeeds) > 0)
-                        toolToBePlaced = toolsOfLevel[3];
+                    ToolSpriteCreator(name, 3, spriteToDrag);
                     break;
                 default:
                     break;
             }
         }
     }
+
+    public void ToolSpriteCreator(string name, int index, Sprite spriteToDrag)
+    {
+        if (toolAmountsInLevel[index] > 0)// && (toolsOfLevel[index].cost - goodDeeds) > 0)
+        {
+            Debug.Log(toolAmountsInLevel[index]);
+            toolToBePlaced = toolsOfLevel[index];
+            toolSprite = new GameObject(name, typeof(SpriteRenderer));
+            SpriteRenderer spriteRenderer = toolSprite.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = spriteToDrag;
+            spriteRenderer.sortingOrder = 26;
+            toolSprite.transform.localScale /= spriteDivider;
+        }
+        else if (toolAmountsInLevel[index] < 0 || toolAmountsInLevel[index] == 0)
+        {
+            Debug.Log("Not enough!");
+            toolToBePlaced = null;
+            toolSprite = null;
+        }
+    }
+
 
     public void ToolDeduction(Tool toolToPlace)
     {

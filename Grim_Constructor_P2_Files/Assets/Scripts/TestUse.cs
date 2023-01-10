@@ -69,7 +69,7 @@ public class TestUse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mouseSprite = level01Manager.toolToDrag;
+        mouseSprite = level01Manager.toolSprite;
         prevMouseSprite = mouseSprite;
         if(prevMouseSprite != mouseSprite)
         {
@@ -95,7 +95,7 @@ public class TestUse : MonoBehaviour
             Debug.Log("Clicking");
             grid.SetValue(mousePosition, 1);
             level01Manager.ToolDeduction(level01Manager.toolToBePlaced);
-            level01Manager.toolToDrag = null;
+            level01Manager.toolSprite = null;
             CallManualTileClear();
             //mouseSprite = null;
         }
