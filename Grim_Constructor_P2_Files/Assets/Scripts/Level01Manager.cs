@@ -70,7 +70,7 @@ public class Level01Manager : MonoBehaviour
 
     public void ToolSpriteCreator(string name, int index, Sprite spriteToDrag)
     {
-        if (toolAmountsInLevel[index] > 0)// && (toolsOfLevel[index].cost - goodDeeds) > 0)
+        if (toolAmountsInLevel[index] > 0 && (goodDeeds - toolsOfLevel[index].cost) >= 0)
         {
             Debug.Log(toolAmountsInLevel[index]);
             toolToBePlaced = toolsOfLevel[index];
