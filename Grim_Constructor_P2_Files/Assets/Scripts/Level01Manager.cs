@@ -18,7 +18,7 @@ public class Level01Manager : MonoBehaviour
     public int[] toolAmountsInLevel;
     public Tool toolToBePlaced;
     public int toolAmountIndex;
-
+    //[SerializeField] string[] spriteNames;
 
 
     // Start is called before the first frame update

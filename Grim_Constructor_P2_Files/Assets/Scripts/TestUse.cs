@@ -12,6 +12,12 @@ public class TestUse : MonoBehaviour
     public Sprite square;
     [SerializeField] Color colorOfLines;
 
+    [Header("Preset Spots")]
+    public int[,] setPositions;
+    public GameObject[] initialSetSprites;
+
+
+
     [Header("Tile Colors")]
     [SerializeField] Color standardColor;
     [SerializeField] Color occupiedColor;
