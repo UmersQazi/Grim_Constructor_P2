@@ -8,4 +8,5 @@ public class Tool : ScriptableObject
     public new string name;
     public int cost;
     public int amount;
+    public int gridPlacementValue;
 }

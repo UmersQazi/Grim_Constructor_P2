@@ -99,7 +99,7 @@ public class TestUse : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && mouseSprite != null && grid.GetValue(mousePosition) == 0 && level01Manager.goodDeeds > 0)
         {
             Debug.Log("Clicking");
-            grid.SetValue(mousePosition, 1);
+            grid.SetValue(mousePosition, level01Manager.toolToBePlaced.gridPlacementValue);
             level01Manager.ToolDeduction(level01Manager.toolToBePlaced);
             level01Manager.toolSprite = null;
             CallManualTileClear();
@@ -269,10 +269,6 @@ public class TestUse : MonoBehaviour
         if(x >= width || y >= height || x < 1 || y < 1)
         {
             CallManualTileClear();
-        }
-        if(x < 1 && y < 1)
-        {
-            //CallManualTileClear();
         }
 
 
