@@ -13,6 +13,9 @@ public class Level01Manager : MonoBehaviour
     [SerializeField] float spriteDivider;
     [SerializeField] TestUse gridAccess;
 
+    [Header("Grid Presets")]
+    [SerializeField] GameObject[] presetSprites;
+
     [Header("Available Tools")]
     public Tool[] toolsOfLevel;
     public int[] toolAmountsInLevel;
@@ -29,6 +32,12 @@ public class Level01Manager : MonoBehaviour
         {
             toolAmountsInLevel[i] = toolsOfLevel[i].amount;
         }
+
+        foreach(GameObject g in presetSprites)
+        {
+            CallSetSpritePos(g);
+        }
+
     }
 
     // Update is called once per frame
@@ -36,6 +45,12 @@ public class Level01Manager : MonoBehaviour
     {
         goodDeedsText.text = "Good Deeds:" + goodDeeds.ToString();
     }
+
+    void CallSetSpritePos(GameObject spriteObj)
+    {
+        gridAccess.SetSpritePos(spriteObj);
+    }
+
 
     public void ClickAndDrag(Sprite spriteToDrag)
     {

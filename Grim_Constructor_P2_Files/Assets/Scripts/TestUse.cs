@@ -189,6 +189,15 @@ public class TestUse : MonoBehaviour
         grid.ManualTileClear();
     }
 
+    public void SetSpritePos(GameObject spriteObj)
+    {
+        int x, y;
+
+        grid.GetXY(spriteObj.transform.position, out x, out y);
+        spriteObj.transform.position = new Vector3(x, y, 0);
+
+    }
+
 
     /*
     public void TurnOffLoad()
