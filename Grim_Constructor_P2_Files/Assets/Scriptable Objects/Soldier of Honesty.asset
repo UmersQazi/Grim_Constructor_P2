@@ -16,3 +16,5 @@ MonoBehaviour:
   cost: 35
   amount: 1
   gridPlacementValue: 0
+  tileIncrementsX: 00000000
+  tileIncrementsY: 00000000

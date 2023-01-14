@@ -195,6 +195,7 @@ public class TestUse : MonoBehaviour
 
         grid.GetXY(spriteObj.transform.position, out x, out y);
         spriteObj.transform.position = new Vector3(x, y, 0);
+        grid.SetValue(spriteObj.transform.position, 1);
 
     }
 
