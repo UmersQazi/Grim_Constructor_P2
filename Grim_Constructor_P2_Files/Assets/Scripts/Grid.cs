@@ -156,6 +156,60 @@ public class Grid : MonoBehaviour
         }
     }
 
+    public void ChangeColorAlt(int x, int y, Tool toolToBePlaced)
+    {
+        if (toolToBePlaced.tileIncrementsX.Length == toolToBePlaced.tileIncrementsY.Length) { 
+            bool canPlace = true;
+            for (int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+            {
+                if (gridArray[x - toolToBePlaced.tileIncrementsX[i],
+                    y - toolToBePlaced.tileIncrementsY[i]] != 0)
+                {
+                    canPlace = false;
+                }
+            }
+
+            if (canPlace)
+            {
+                for (int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+                {
+                    greenSpriteArray[x - toolToBePlaced.tileIncrementsX[i],
+                        y - toolToBePlaced.tileIncrementsY[i]].color = availableColor;
+                }
+            }
+
+            else if (!canPlace)
+            {
+                for (int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+                {
+                    greenSpriteArray[x - toolToBePlaced.tileIncrementsX[i],
+                        y - toolToBePlaced.tileIncrementsY[i]].color = occupiedColor;
+                }
+            }
+
+            //TileClearAlt(x, y, toolToBePlaced);
+        }
+
+    }
+
+    public void TileClearAlt(int x, int y, Tool toolToBePlaced)
+    {
+        for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
+        {
+            for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
+            {
+                for(int i = 0; i < toolToBePlaced.tileIncrementsX.GetLength(0); i++)
+                {
+                    if(z != x - toolToBePlaced.tileIncrementsX[i] &&
+                        w != y - toolToBePlaced.tileIncrementsY[i])
+                    {
+                        greenSpriteArray[z, w].color = standardColor;
+                    }
+                }
+            }
+        }
+    }
+
     public void ChangeColor(int x, int y, GameObject mouseSprite)
     {
         
@@ -175,10 +229,12 @@ public class Grid : MonoBehaviour
         }
         else
         {
+            /*
             greenSpriteArray[x, y].color = standardColor;
             greenSpriteArray[x, y - 1].color = standardColor;
             greenSpriteArray[x - 1, y].color = standardColor;
             greenSpriteArray[x - 1, y - 1].color = standardColor;
+            */
         }
 
 

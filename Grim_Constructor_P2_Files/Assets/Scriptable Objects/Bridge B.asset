@@ -17,4 +17,4 @@ MonoBehaviour:
   amount: 1
   gridPlacementValue: 1
   tileIncrementsX: 0000000000000000
-  tileIncrementsY: 0000000000000000
+  tileIncrementsY: 0000000001000000

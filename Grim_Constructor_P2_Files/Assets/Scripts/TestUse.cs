@@ -271,7 +271,7 @@ public class TestUse : MonoBehaviour
         {
             mouseSprite.transform.position = new Vector3(x, y, 0) * cellSize + origin;
             if (mouseSprite != null)
-                grid.ChangeColor(x, y, mouseSprite);
+                grid.ChangeColorAlt(x, y, level01Manager.toolToBePlaced);
             else
                 CallManualTileClear();
         }
