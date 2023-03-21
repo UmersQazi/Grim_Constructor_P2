@@ -63,39 +63,53 @@ public class TestUse : MonoBehaviour
     void Start()
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
+        //This line creates the actual grid. The user gives data involving the shape, the text, and colors of the grid.
         grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, 
             toolSpriteSortingOrder, standardColor, occupiedColor, availableColor, level01Manager);
         //clicked = false;
         //orignalSprite = mouseSprite;
+
+        //Observes the initial position of the mouse and looks at the original mouse sprite
         originalMousePos = mousePos;
         prevMouseSprite = mouseSprite;
+
+        //Makes sure none of the tiles in the grid have any color that indicates a spot is occupied
         CallManualTileClear();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //The current mouse sprite will always be whatever tool the user clicked on in the tool belt UI
         mouseSprite = level01Manager.toolSprite;
         prevMouseSprite = mouseSprite;
+
+        //Makes sure to keep tiles the same unoccupied color once the user clicks on a tool
         if(prevMouseSprite != mouseSprite)
         {
             CallManualTileClear();
             prevMouseSprite = mouseSprite;
         }
+
+        //Resets the mouse position
         if(mousePos != originalMousePos)
         {
             
             //moveSound.Play();
             originalMousePos = mousePos;
         }
+
+        //Gets the current mouse position
         mousePosition = UtilsClass.GetMouseWorldPosition();
+
+        //Rounds down the current mouse position for the tile the mouse is hovering over in the grid
         roundedMousePos = grid.GetValue(mousePosition);
 
-        //If object has not been placed, move the sprite with mouse
+        //If tool has not been placed, move the sprite with mouse
         if(!clicked && mouseSprite != null)
             MoveSprite();
 
-
+        //Places tool sprite onto the grid and makes sure the tiles are the same color after
         if (Input.GetMouseButtonDown(0) && mouseSprite != null && grid.GetValue(mousePosition) == 0 && level01Manager.goodDeeds > 0)
         {
             Debug.Log("Clicking");
@@ -166,6 +180,7 @@ public class TestUse : MonoBehaviour
             
         }
         */
+
         //Right-click to check mouse position
         if (Input.GetMouseButton(1))
         {
@@ -184,11 +199,13 @@ public class TestUse : MonoBehaviour
 
     }
 
+    //Clears tiles of any differing colors
     public void CallManualTileClear()
     {
         grid.ManualTileClear();
     }
 
+    //Sets the tool sprite's position on the grid
     public void SetSpritePos(GameObject spriteObj)
     {
         int x, y;
@@ -267,6 +284,7 @@ public class TestUse : MonoBehaviour
 
         //This rounded position is what lets the mouse sprite move across the scene in a rigid manner
         //If i need it off center, remove .5 increments
+        //Moves the mouse sprite rigidly as long as the position is not at any of the edges of or over the grid
         if (x < width && y < height && x >= 1 && y >= 1)
         {
             mouseSprite.transform.position = new Vector3(x, y, 0) * cellSize + origin;
@@ -281,6 +299,7 @@ public class TestUse : MonoBehaviour
                 toolInstance.tileIncrementsY = level01Manager.toolToBePlaced.tileIncrementsY;
                 */
                 
+                //Changes the color of the tiles the moue is hovering over
                 grid.ChangeColor(x, y, mouseSprite);
             }
             else
