@@ -26,6 +26,7 @@ public class Grid : MonoBehaviour
     private Level01Manager levelManager;
 
 
+    //This is the constructor used to create the grid.
     public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color
         , int squareSpriteSortingOrder, int toolSpriteSortingOrder, Color standardColor, Color occupiedColor, Color availableColor, Level01Manager levelManager)
     {
@@ -38,12 +39,18 @@ public class Grid : MonoBehaviour
         this.squareSpriteSortingOrder = squareSpriteSortingOrder;
         this.toolSpriteSortingOrder = toolSpriteSortingOrder;
 
+        //These are the colors used to identify when a tile is marked as occupied, available
+        //and the standard color when the mouse isn't hovering over it
         this.standardColor = standardColor;
         this.occupiedColor = occupiedColor;
         this.availableColor = availableColor;
         
+        //Array used to reference the tiles/positions on the grid
         gridArray = new int[width, height];
+
+        //Array that holds the lie renderers used to form the grid visually
         lineArray = new LineRenderer[width, height];
+
         //Array that holds all the text objects seen within the cells of the grid
         debugTextArray = new TextMesh[width, height];
 
@@ -90,7 +97,7 @@ public class Grid : MonoBehaviour
         return new Vector3(x, y) * cellSize + originPosition;
     }
 
-    //Sets the value of the given square
+    //Sets the value of the given square (For now, this is utilized for tools that occupy four tiles)
     public void SetValue(int x, int y, int value)
     {
         //Changes the value
@@ -125,6 +132,7 @@ public class Grid : MonoBehaviour
         SetValue(x, y, value);
     }
 
+    //Gets value of a tile in the grid
     public int GetValue(int x, int y)
     {
         //This if statement accounts for the edges and corners of the grid
@@ -142,6 +150,7 @@ public class Grid : MonoBehaviour
         
     }
 
+    //Passes in the position of the grid tile the user is trying to access
     public int GetValue(Vector3 worldPosition)
     {
         int x, y;
@@ -150,6 +159,7 @@ public class Grid : MonoBehaviour
         
     }
 
+    //Makes sure all tiles are colored the standard color
     public void ClearGreen()
     {
         foreach(SpriteRenderer g in greenSpriteArray)
@@ -157,6 +167,8 @@ public class Grid : MonoBehaviour
             g.color = standardColor;
         }
     }
+
+    //WIP
 
     public void ChangeColorAlt(int x, int y, Level01Manager levelManager)
     {
@@ -289,6 +301,7 @@ public class Grid : MonoBehaviour
     }
 
 
+    //Changes the color of four selected tiles 
     public void ChangeColor(int x, int y, GameObject mouseSprite)
     {
         
@@ -323,6 +336,7 @@ public class Grid : MonoBehaviour
 
     }
 
+    //Makes all tiles that are not the selected tiles the standard color
     public void TileClear(int x, int y, GameObject mouseSprite)
     {
         
