@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
@@ -22,10 +23,11 @@ public class Grid : MonoBehaviour
     private Color occupiedColor;
     private Color availableColor;
 
+    private Level01Manager levelManager;
 
 
     public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color
-        , int squareSpriteSortingOrder, int toolSpriteSortingOrder, Color standardColor, Color occupiedColor, Color availableColor)
+        , int squareSpriteSortingOrder, int toolSpriteSortingOrder, Color standardColor, Color occupiedColor, Color availableColor, Level01Manager levelManager)
     {
         this.width = width;
         this.height = height;
@@ -156,14 +158,14 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void ChangeColorAlt(int x, int y, Tool toolToBePlaced)
+    public void ChangeColorAlt(int x, int y, Level01Manager levelManager)
     {
-        if (toolToBePlaced.tileIncrementsX.Length == toolToBePlaced.tileIncrementsY.Length) { 
+        if (levelManager.toolToBePlaced.tileIncrementsX.Length == levelManager.toolToBePlaced.tileIncrementsY.Length) { 
             bool canPlace = true;
-            for (int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+            for (int i = 0; i < levelManager.toolToBePlaced.tileIncrementsX.Length; i++)
             {
-                if (gridArray[x - toolToBePlaced.tileIncrementsX[i],
-                    y - toolToBePlaced.tileIncrementsY[i]] != 0)
+                if (gridArray[x - levelManager.toolToBePlaced.tileIncrementsX[i],
+                    y - levelManager.toolToBePlaced.tileIncrementsY[i]] != 0)
                 {
                     canPlace = false;
                 }
@@ -171,44 +173,121 @@ public class Grid : MonoBehaviour
 
             if (canPlace)
             {
-                for (int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+                for (int i = 0; i < levelManager.toolToBePlaced.tileIncrementsX.Length; i++)
                 {
-                    greenSpriteArray[x - toolToBePlaced.tileIncrementsX[i],
-                        y - toolToBePlaced.tileIncrementsY[i]].color = availableColor;
+                    greenSpriteArray[x - levelManager.toolToBePlaced.tileIncrementsX[i],
+                        y - levelManager.toolToBePlaced.tileIncrementsY[i]].color = availableColor;
                 }
             }
 
             else if (!canPlace)
             {
-                for (int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+                for (int i = 0; i < levelManager.toolToBePlaced.tileIncrementsX.Length; i++)
                 {
-                    greenSpriteArray[x - toolToBePlaced.tileIncrementsX[i],
-                        y - toolToBePlaced.tileIncrementsY[i]].color = occupiedColor;
+                    greenSpriteArray[x - levelManager.toolToBePlaced.tileIncrementsX[i],
+                        y - levelManager.toolToBePlaced.tileIncrementsY[i]].color = occupiedColor;
                 }
             }
+            //Tool toolInstance = ScriptableObject.CreateInstance("Tool") as Tool;
+            //toolInstance.tileIncrementsCoordinates = toolToBePlaced.tileIncrementsCoordinates;
 
-            //TileClearAlt(x, y, toolToBePlaced);
+
+            TileClearAlt(x, y, levelManager.toolToBePlaced);
         }
 
     }
 
+
+    //For some reason requires an instance of the tool??????
     public void TileClearAlt(int x, int y, Tool toolToBePlaced)
     {
+        bool noMatch = false;
         for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
         {
             for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
             {
-                for(int i = 0; i < toolToBePlaced.tileIncrementsX.GetLength(0); i++)
+                noMatch = TileClearAlt2(x, y, z, w, toolToBePlaced);
+
+                if (noMatch)
                 {
-                    if(z != x - toolToBePlaced.tileIncrementsX[i] &&
-                        w != y - toolToBePlaced.tileIncrementsY[i])
-                    {
-                        greenSpriteArray[z, w].color = standardColor;
-                    }
+                    Debug.Log("Clearing Tile");
+                    greenSpriteArray[z, w].color = standardColor;
                 }
+                
+
             }
         }
+        //ScriptableObject.Destroy(toolToBePlaced);
     }
+
+    public bool TileClearAlt2(int x, int y, int z, int w, Tool toolToBePlaced)
+    {
+        Dictionary<int, int> tileCoor = toolToBePlaced.tileIncrementsCoordinates; 
+
+        if(toolToBePlaced != null)
+        {
+            Debug.Log("Tool detected");
+            Debug.Log("Number of coordinates:  " + toolToBePlaced.tileIncrementsX.Length);
+        }
+        else
+        {
+            Debug.Log("Tool NOT detected");
+        }
+
+        
+
+        bool noMatch = false;
+
+
+
+
+
+        for(int i = 0; i < toolToBePlaced.tileIncrementsX.Length; i++)
+        {
+            int xCoor = toolToBePlaced.tileIncrementsX[i];
+            int yCoor = toolToBePlaced.tileIncrementsY[i];
+            Debug.Log("Increments: " + xCoor + "," + yCoor);
+            //tileCoor.TryGetValue(tileCoor[i], out yCoor);
+
+            //Debug.Log(tileCoor[i] + ", " + yCoor);
+
+            if (x - xCoor != z && y - yCoor == w)
+            {
+                noMatch = true;
+            }else if(x - xCoor == z && y - yCoor != w)
+            {
+                noMatch = true;
+            }else if(x - xCoor != z && y - yCoor != w)
+            {
+                noMatch = true;
+            }else if(x - xCoor == z && y - yCoor == w)
+            {
+                Debug.Log("Its equal");
+            }
+
+        }
+
+        if (noMatch)
+        {
+            Debug.Log("Clearing");
+        }
+
+        return noMatch;
+
+
+
+        
+        /*
+        if(toolToBePlaced.tileIncrementsCoordinates.ContainsKey(x) && toolToBePlaced.tileIncrementsCoordinates[x] != y)
+        {
+            greenSpriteArray[x, y].color = standardColor;
+        }else if (!toolToBePlaced.tileIncrementsCoordinates.ContainsKey(x))
+        {
+            greenSpriteArray[x, y].color = standardColor;
+        }
+        */
+    }
+
 
     public void ChangeColor(int x, int y, GameObject mouseSprite)
     {

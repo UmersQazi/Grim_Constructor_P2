@@ -64,7 +64,7 @@ public class TestUse : MonoBehaviour
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
         grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, 
-            toolSpriteSortingOrder, standardColor, occupiedColor, availableColor);
+            toolSpriteSortingOrder, standardColor, occupiedColor, availableColor, level01Manager);
         //clicked = false;
         //orignalSprite = mouseSprite;
         originalMousePos = mousePos;
@@ -271,7 +271,18 @@ public class TestUse : MonoBehaviour
         {
             mouseSprite.transform.position = new Vector3(x, y, 0) * cellSize + origin;
             if (mouseSprite != null)
-                grid.ChangeColorAlt(x, y, level01Manager.toolToBePlaced);
+            {
+                //Debug.Log("Count: " +level01Manager.toolToBePlaced.tileIncrementsX.Length);
+                /*
+                Tool toolInstance = ScriptableObject.CreateInstance("Tool") as Tool;
+                toolInstance.amount = level01Manager.toolToBePlaced.amount;
+                toolInstance.cost = level01Manager.toolToBePlaced.cost;
+                toolInstance.tileIncrementsX = level01Manager.toolToBePlaced.tileIncrementsX;
+                toolInstance.tileIncrementsY = level01Manager.toolToBePlaced.tileIncrementsY;
+                */
+                
+                grid.ChangeColor(x, y, mouseSprite);
+            }
             else
                 CallManualTileClear();
         }

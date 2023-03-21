@@ -14,4 +14,13 @@ public class Tool : ScriptableObject
     public int gridPlacementValue;
     public int[] tileIncrementsX;
     public int[] tileIncrementsY;
+    public Dictionary<int, int> tileIncrementsCoordinates;
+
+    private void Awake()
+    {
+        for (int i = 0; i < tileIncrementsX.Length; i++) {
+
+            tileIncrementsCoordinates.Add(tileIncrementsX[i], tileIncrementsY[i]);
+        }
+    }
 }
