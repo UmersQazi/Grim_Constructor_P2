@@ -27,12 +27,16 @@ public class Level01Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Finds the number of tools the player can use in the current level
         toolAmountsInLevel = new int[toolsOfLevel.Length];
+
+        //Collects the amounts of each tool available in the level for the player in an array
         for(int i = 0; i < toolsOfLevel.Length; i++)
         {
             toolAmountsInLevel[i] = toolsOfLevel[i].amount;
         }
 
+        //Sets the sprite positions of sprites that are already in the level at the beginning on the grid
         foreach(GameObject g in presetSprites)
         {
             CallSetSpritePos(g);
@@ -43,15 +47,17 @@ public class Level01Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Sets text for player to see the number of GD they can spend
         goodDeedsText.text = "Good Deeds:" + goodDeeds.ToString();
     }
 
+    
     void CallSetSpritePos(GameObject spriteObj)
     {
         gridAccess.SetSpritePos(spriteObj);
     }
 
-
+    //A Button event that sets the sprite the user wants to drag
     public void ClickAndDrag(Sprite spriteToDrag)
     {
         if (goodDeeds > 0)
@@ -83,8 +89,11 @@ public class Level01Manager : MonoBehaviour
         }
     }
 
+    //
     public void ToolSpriteCreator(string name, int index, Sprite spriteToDrag)
     {
+        //As long as the amount of a tool is more than 0 and the player can purchase it, the player can use
+        //the sprite of that tool to move it around the grid and place it 
         if (toolAmountsInLevel[index] > 0 && (goodDeeds - toolsOfLevel[index].cost) >= 0)
         {
             Debug.Log(toolAmountsInLevel[index]);
@@ -95,6 +104,7 @@ public class Level01Manager : MonoBehaviour
             spriteRenderer.sortingOrder = 26;
             toolSprite.transform.localScale /= spriteDivider;
         }
+        //Otherwise, the player cannot use that tool
         else if (toolAmountsInLevel[index] < 0 || toolAmountsInLevel[index] == 0)
         {
             Debug.Log("Not enough!");
@@ -104,6 +114,7 @@ public class Level01Manager : MonoBehaviour
     }
 
 
+    //Deducts the tool amount and the amount of GD from the player
     public void ToolDeduction(Tool toolToPlace)
     {
         goodDeeds -= toolToPlace.cost;
