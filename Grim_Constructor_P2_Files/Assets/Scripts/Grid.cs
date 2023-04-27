@@ -26,10 +26,14 @@ public class Grid : MonoBehaviour
     private Level01Manager levelManager;
 
 
+    private List<Vector2Int> previouslyHighlighted;
+
+
     //This is the constructor used to create the grid.
     public Grid(int width, int height, int fontSize, float cellSize, Vector3 originPosition, Sprite square, UnityEngine.Color color
         , int squareSpriteSortingOrder, int toolSpriteSortingOrder, Color standardColor, Color occupiedColor, Color availableColor, Level01Manager levelManager)
     {
+        previouslyHighlighted = new List<Vector2Int>();
         this.width = width;
         this.height = height;
         this.fontSize = fontSize;
@@ -172,8 +176,10 @@ public class Grid : MonoBehaviour
 
     public void ChangeColorAlt(int x, int y, Level01Manager levelManager)
     {
+        //Checks if the current tool has tileIncrement arrays that are the same size
         if (levelManager.toolToBePlaced.tileIncrementsX.Length == levelManager.toolToBePlaced.tileIncrementsY.Length) { 
             bool canPlace = true;
+            //Checks if any of the selected spots are occupied
             for (int i = 0; i < levelManager.toolToBePlaced.tileIncrementsX.Length; i++)
             {
                 if (gridArray[x - levelManager.toolToBePlaced.tileIncrementsX[i],
@@ -183,6 +189,7 @@ public class Grid : MonoBehaviour
                 }
             }
 
+            //If all of the spots are unoccupied, the selected tiles get colored to be available
             if (canPlace)
             {
                 for (int i = 0; i < levelManager.toolToBePlaced.tileIncrementsX.Length; i++)
@@ -192,6 +199,7 @@ public class Grid : MonoBehaviour
                 }
             }
 
+            //Otherwise, all the selected tiles get colored the occupied color
             else if (!canPlace)
             {
                 for (int i = 0; i < levelManager.toolToBePlaced.tileIncrementsX.Length; i++)
@@ -203,7 +211,7 @@ public class Grid : MonoBehaviour
             //Tool toolInstance = ScriptableObject.CreateInstance("Tool") as Tool;
             //toolInstance.tileIncrementsCoordinates = toolToBePlaced.tileIncrementsCoordinates;
 
-
+            //While this is all happening, make sure that the rest of the tiles in the grid are marked the standard color
             TileClearAlt(x, y, levelManager.toolToBePlaced);
         }
 
@@ -299,6 +307,158 @@ public class Grid : MonoBehaviour
         }
         */
     }
+
+
+    public void ChangeColorAlt2(int x, int y, Level01Manager levelManager)
+    {
+        if (levelManager.toolToBePlaced.tileIncrementsX.Length == levelManager.toolToBePlaced.tileIncrementsY.Length)
+        {
+            if (gridArray[x + levelManager.toolToBePlaced.tileIncrementsX[0], 
+                y + levelManager.toolToBePlaced.tileIncrementsY[0]] == 0 &&
+
+                gridArray[x + levelManager.toolToBePlaced.tileIncrementsX[1],
+                y + levelManager.toolToBePlaced.tileIncrementsY[1]] == 0 &&
+
+                gridArray[x + levelManager.toolToBePlaced.tileIncrementsX[2],
+                y + levelManager.toolToBePlaced.tileIncrementsY[2]] == 0) {
+
+
+
+
+                greenSpriteArray[x + levelManager.toolToBePlaced.tileIncrementsX[0],
+                y + levelManager.toolToBePlaced.tileIncrementsY[0]].color = availableColor;
+
+                greenSpriteArray[x + levelManager.toolToBePlaced.tileIncrementsX[1],
+                y + levelManager.toolToBePlaced.tileIncrementsY[1]].color = availableColor;
+
+                greenSpriteArray[x + levelManager.toolToBePlaced.tileIncrementsX[2],
+                y + levelManager.toolToBePlaced.tileIncrementsY[2]].color = availableColor;
+
+
+            }
+
+            else if(gridArray[x + levelManager.toolToBePlaced.tileIncrementsX[0],
+                y + levelManager.toolToBePlaced.tileIncrementsY[0]] == 1 ||
+
+                gridArray[x + levelManager.toolToBePlaced.tileIncrementsX[1],
+                y + levelManager.toolToBePlaced.tileIncrementsY[1]] == 1 ||
+
+                gridArray[x + levelManager.toolToBePlaced.tileIncrementsX[2],
+                y + levelManager.toolToBePlaced.tileIncrementsY[2]] == 1){
+
+
+                greenSpriteArray[x + levelManager.toolToBePlaced.tileIncrementsX[0],
+                y + levelManager.toolToBePlaced.tileIncrementsY[0]].color = occupiedColor;
+
+                greenSpriteArray[x + levelManager.toolToBePlaced.tileIncrementsX[1],
+                y + levelManager.toolToBePlaced.tileIncrementsY[1]].color = occupiedColor;
+
+                greenSpriteArray[x + levelManager.toolToBePlaced.tileIncrementsX[2],
+                y + levelManager.toolToBePlaced.tileIncrementsY[2]].color = occupiedColor;
+
+
+            }
+
+        }
+
+        TileClearAlt3(x, y, levelManager);
+
+    }
+
+    public void TileClearAlt3(int x, int y, Level01Manager levelManager)
+    {
+        /*
+        for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
+        {
+            for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
+            {
+
+                if (z != x && z != x - 1 && w != y && w != y - 1)
+                {
+                    greenSpriteArray[z, w].color = standardColor;
+                }
+
+                if (z == x && w != y && w != y - 1)
+                {
+                    greenSpriteArray[z, w].color = standardColor;
+                }
+                if (w == y && z != x - 1 && z != x)
+                {
+                    greenSpriteArray[z, w].color = standardColor;
+                }
+                if (z == x - 1 && w != y && w != y - 1)
+                {
+                    greenSpriteArray[z, w].color = standardColor;
+                }
+                if (w == y - 1 && z != x - 1 && z != x)
+                {
+                    greenSpriteArray[z, w].color = standardColor;
+                }
+
+
+            }
+        }
+        */
+        for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
+        {
+            for(int w = 0; w < greenSpriteArray.GetLength(1); w++)
+            {
+                if ((z != x + levelManager.toolToBePlaced.tileIncrementsX[0] ||
+                    z != x + levelManager.toolToBePlaced.tileIncrementsX[1] ||
+                    z != x + levelManager.toolToBePlaced.tileIncrementsX[2]) &&
+                    (w != y + levelManager.toolToBePlaced.tileIncrementsY[0] ||
+                    w != y + levelManager.toolToBePlaced.tileIncrementsY[1] ||
+                    w != y + levelManager.toolToBePlaced.tileIncrementsY[2]))
+                {
+                    greenSpriteArray[z, w].color = standardColor;
+                }
+            }
+        }
+
+    }
+
+
+    public void ChangeColorShape(int x, int y, Level01Manager levelManager)
+    {
+
+        List<Vector2Int> newPositions = new List<Vector2Int>();
+
+        TileClearShape(x, y, levelManager, newPositions);
+
+        for (int i = 0; i < levelManager.toolToBePlaced.shape.TileIncrements.Count; i++)
+        {
+            newPositions.Add(new Vector2Int(x,y) + levelManager.toolToBePlaced.shape.TileIncrements[i]);
+        }
+
+        foreach(Vector2Int pos in newPositions)
+        {
+            if (gridArray[pos.x, pos.y] == 0)
+                greenSpriteArray[pos.x, pos.y].color = availableColor;
+            else
+                greenSpriteArray[pos.x, pos.y].color = occupiedColor;
+        }
+
+        previouslyHighlighted.AddRange(newPositions);
+
+        
+    }
+
+    public void TileClearShape(int x, int y, Level01Manager levelManager, List<Vector2Int> newPositions)
+    {
+        if (!newPositions.SequenceEqual(previouslyHighlighted))
+        {
+            for (int i = 0; i < previouslyHighlighted.Count; i++)
+            {
+                greenSpriteArray[previouslyHighlighted[i].x, previouslyHighlighted[i].y].color = standardColor;
+            }
+            previouslyHighlighted.Clear();
+        }
+
+        Debug.Log("Length: " + previouslyHighlighted.Count);
+        
+        
+    }
+
 
 
     //Changes the color of four selected tiles 

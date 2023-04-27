@@ -631,7 +631,7 @@ MonoBehaviour:
   goodDeeds: 105
   goodDeedsText: {fileID: 305056990}
   toolSprite: {fileID: 0}
-  spriteDivider: 2
+  spriteDivider: 3
   gridAccess: {fileID: 44663767}
   presetSprites:
   - {fileID: 1925388803}

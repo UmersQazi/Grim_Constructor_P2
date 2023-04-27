@@ -15,6 +15,7 @@ public class Tool : ScriptableObject
     public int[] tileIncrementsX;
     public int[] tileIncrementsY;
     public Dictionary<int, int> tileIncrementsCoordinates;
+    public Shape shape;
 
     private void Awake()
     {

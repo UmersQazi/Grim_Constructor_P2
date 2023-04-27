@@ -300,7 +300,7 @@ public class TestUse : MonoBehaviour
                 */
                 
                 //Changes the color of the tiles the moue is hovering over
-                grid.ChangeColor(x, y, mouseSprite);
+                grid.ChangeColorShape(x, y, level01Manager);
             }
             else
                 CallManualTileClear();
