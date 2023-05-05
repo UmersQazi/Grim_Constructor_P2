@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grid<TGridObj>
 {
     private int width, height, fontSize;
-    private int[,] gridArray;
+    private TGridObj[,] gridArray;
     private float cellSize;
     private Vector3 originPosition;
 
@@ -48,9 +48,9 @@ public class Grid<TGridObj>
         this.standardColor = standardColor;
         this.occupiedColor = occupiedColor;
         this.availableColor = availableColor;
-        
+
         //Array used to reference the tiles/positions on the grid
-        gridArray = new int[width, height];
+        gridArray = new TGridObj[width, height];
 
         //Array that holds the lie renderers used to form the grid visually
         lineArray = new LineRenderer[width, height];
@@ -63,21 +63,21 @@ public class Grid<TGridObj>
 
 
         for (int x = 0; x < gridArray.GetLength(0); x++)
-            for(int y = 0; y < gridArray.GetLength(1); y++)
+            for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 //Creates and adds a new text object to the text array
-                debugTextArray[x,y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 5, 
+                debugTextArray[x, y] = UtilsClass.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 5,
                 Color.white, TextAnchor.MiddleCenter);
                 //Debug.Log($"{x}, {y}");
                 //Debug.Log("Drawing Line\n");
 
                 //Draws out the grid
-                lineArray[x, y] = UtilsClass.CreateNewLineRenderer(cellSize, null, GetWorldPosition(x,y), color, 25);
+                lineArray[x, y] = UtilsClass.CreateNewLineRenderer(cellSize, null, GetWorldPosition(x, y), color, 25);
                 //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y+1), Color.white,100f);
                 //Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
 
                 //Create and add a new green square sprite at the cell's location
-                greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null, 
+                greenSpriteArray[x, y] = UtilsClass.CreateNewSprite(square, null,
                     GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, standardColor, 25, cellSize);
 
 
@@ -92,7 +92,7 @@ public class Grid<TGridObj>
 
     private void Update()
     {
-        
+
     }
 
     //Gets the position of the given grid box
@@ -101,7 +101,7 @@ public class Grid<TGridObj>
         return new Vector3(x, y) * cellSize + originPosition;
     }
 
-    public void SetValue(int x, int y, int value, Shape shape)
+    public void SetValue(int x, int y, TGridObj value, Shape shape)
     {
         List<Vector2Int> newPositions = new List<Vector2Int>();
 
@@ -114,7 +114,8 @@ public class Grid<TGridObj>
 
         foreach (Vector2Int pos in newPositions)
         {
-            if (gridArray[pos.x, pos.y] == 0)
+            if (EqualityComparer<TGridObj>.Default.Equals(gridArray[pos.x, pos.y], default))
+            //if (gridArray[pos.x, pos.y] == default)
             {
                 gridArray[pos.x, pos.y] = value;
                 debugTextArray[pos.x, pos.y].text = gridArray[pos.x, pos.y].ToString();
@@ -125,48 +126,48 @@ public class Grid<TGridObj>
     }
 
     //Sets the value of the given square (For now, this is utilized for tools that occupy four tiles)
-    public void SetValue(int x, int y, int value)
+    public void SetValue(int x, int y, TGridObj value)
     {
         //Changes the value
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
             gridArray[x, y] = value;
-            gridArray[x, y-1] = value;
-            gridArray[x-1, y] = value;
-            gridArray[x-1, y-1] = value;
+            gridArray[x, y - 1] = value;
+            gridArray[x - 1, y] = value;
+            gridArray[x - 1, y - 1] = value;
         }
 
         //Changes the text of the cell to the new value
-        debugTextArray[x, y].text = gridArray[x,y].ToString();
-        debugTextArray[x, y-1].text = gridArray[x, y-1].ToString();
-        debugTextArray[x-1, y].text = gridArray[x-1, y].ToString();
-        debugTextArray[x-1, y-1].text = gridArray[x-1, y-1].ToString();
+        debugTextArray[x, y].text = gridArray[x, y].ToString();
+        debugTextArray[x, y - 1].text = gridArray[x, y - 1].ToString();
+        debugTextArray[x - 1, y].text = gridArray[x - 1, y].ToString();
+        debugTextArray[x - 1, y - 1].text = gridArray[x - 1, y - 1].ToString();
     }
 
     //Returns the position clicked on the mouse as the index on the gridArray
     public void GetXY(Vector3 worldPosition, out int x, out int y)
     {
-        x = Mathf.FloorToInt((worldPosition - originPosition).x/cellSize);
-        y = Mathf.FloorToInt((worldPosition- originPosition).y/cellSize);
+        x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
+        y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
     }
 
     //Takes position clicked on by mouse and the new value, changes the position into a gridArray index and
     //calls the original SetValue method that changes the value of that index and the TextMesh
-    public void SetValue(Vector3 worldPosition, int value, Level01Manager levelManager)
+    public void SetValue(Vector3 worldPosition, TGridObj value, Level01Manager levelManager)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);
         SetValue(x, y, value, levelManager.toolToBePlaced.shape);
     }
 
-    public void SetValueForPreset(GameObject sprite, Vector3 worldPosition, int value, Level01Manager levelManager)
+    public void SetValueForPreset(GameObject sprite, Vector3 worldPosition, TGridObj value, Level01Manager levelManager)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);
         SetValueForPreset(x, y, value, levelManager, sprite);
     }
 
-    public void SetValueForPreset(int x, int y, int value, Level01Manager levelManager, GameObject sprite)
+    public void SetValueForPreset(int x, int y, TGridObj value, Level01Manager levelManager, GameObject sprite)
     {
 
         switch (sprite.GetComponent<SpriteRenderer>().sprite.name)
@@ -186,7 +187,7 @@ public class Grid<TGridObj>
                 debugTextArray[x, y - 1].text = gridArray[x, y - 1].ToString();
                 break;
             default:
-                gridArray[x, y] = 2;
+                gridArray[x, y] = default;
                 debugTextArray[x, y].text = gridArray[x, y].ToString();
                 break;
 
@@ -194,36 +195,40 @@ public class Grid<TGridObj>
         }
     }
     //Gets value of a tile in the grid
-    public int GetValue(int x, int y)
+    public TGridObj GetValue(int x, int y)
     {
         //This if statement accounts for the edges and corners of the grid
         if (x == width - 1 || y == height - 1 || x == 0 || y == 0)
         {
-            return -1;
+            return default;
         }
 
         if (x >= 0 && y >= 0 && x < width && y < height)
-            if(gridArray[x, y] == 0 && gridArray[x, y - 1] == 0 && gridArray[x - 1, y] == 0 && gridArray[x - 1, y - 1] == 0)
+            if (EqualityComparer<TGridObj>.Default.Equals(gridArray[x,y], default) && 
+                EqualityComparer<TGridObj>.Default.Equals(gridArray[x, y-1], default) &&
+                EqualityComparer<TGridObj>.Default.Equals(gridArray[x-1, y], default) &&
+                EqualityComparer<TGridObj>.Default.Equals(gridArray[x - 1, y-1], default))
+            //if (gridArray[x, y] == 0 && gridArray[x, y - 1] == 0 && gridArray[x - 1, y] == 0 && gridArray[x - 1, y - 1] == 0)
                 return gridArray[x, y];
         //else
-            return -1;
+        return default;
 
-        
+
     }
 
     //Passes in the position of the grid tile the user is trying to access
-    public int GetValue(Vector3 worldPosition)
+    public TGridObj GetValue(Vector3 worldPosition)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);
         return GetValue(x, y);
-        
+
     }
 
     //Makes sure all tiles are colored the standard color
     public void ClearGreen()
     {
-        foreach(SpriteRenderer g in greenSpriteArray)
+        foreach (SpriteRenderer g in greenSpriteArray)
         {
             g.color = standardColor;
         }
@@ -231,6 +236,7 @@ public class Grid<TGridObj>
 
     //WIP
 
+    /*
     public void ChangeColorAlt(int x, int y, Level01Manager levelManager)
     {
         //Checks if the current tool has tileIncrement arrays that are the same size
@@ -362,10 +368,10 @@ public class Grid<TGridObj>
         {
             greenSpriteArray[x, y].color = standardColor;
         }
-        */
+        
     }
-
-
+    */
+    /*
     public void ChangeColorAlt2(int x, int y, Level01Manager levelManager)
     {
         if (levelManager.toolToBePlaced.tileIncrementsX.Length == levelManager.toolToBePlaced.tileIncrementsY.Length)
@@ -424,7 +430,7 @@ public class Grid<TGridObj>
 
     public void TileClearAlt3(int x, int y, Level01Manager levelManager)
     {
-        /*
+        
         for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
         {
             for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
@@ -455,7 +461,7 @@ public class Grid<TGridObj>
 
             }
         }
-        */
+        
         for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
         {
             for(int w = 0; w < greenSpriteArray.GetLength(1); w++)
@@ -474,7 +480,7 @@ public class Grid<TGridObj>
 
     }
 
-
+    */
     public void ChangeColorShape(int x, int y, Level01Manager levelManager)
     {
 
@@ -484,12 +490,13 @@ public class Grid<TGridObj>
 
         for (int i = 0; i < levelManager.toolToBePlaced.shape.TileIncrements.Count; i++)
         {
-            newPositions.Add(new Vector2Int(x,y) + levelManager.toolToBePlaced.shape.TileIncrements[i]);
+            newPositions.Add(new Vector2Int(x, y) + levelManager.toolToBePlaced.shape.TileIncrements[i]);
         }
 
-        foreach(Vector2Int pos in newPositions)
+        foreach (Vector2Int pos in newPositions)
         {
-            if (gridArray[pos.x, pos.y] == 0)
+            if (EqualityComparer<TGridObj>.Default.Equals(gridArray[pos.x, pos.y], default))
+                //if (gridArray[pos.x, pos.y] == 0)
                 greenSpriteArray[pos.x, pos.y].color = availableColor;
             else
                 greenSpriteArray[pos.x, pos.y].color = occupiedColor;
@@ -497,7 +504,7 @@ public class Grid<TGridObj>
 
         previouslyHighlighted.AddRange(newPositions);
 
-        
+
     }
 
     public void TileClearShape(int x, int y, Level01Manager levelManager, List<Vector2Int> newPositions)
@@ -512,12 +519,12 @@ public class Grid<TGridObj>
         }
 
         Debug.Log("Length: " + previouslyHighlighted.Count);
-        
-        
+
+
     }
 
 
-
+    /*
     //Changes the color of four selected tiles 
     public void ChangeColor(int x, int y, GameObject mouseSprite)
     {
@@ -538,12 +545,12 @@ public class Grid<TGridObj>
         }
         else
         {
-            /*
+            
             greenSpriteArray[x, y].color = standardColor;
             greenSpriteArray[x, y - 1].color = standardColor;
             greenSpriteArray[x - 1, y].color = standardColor;
             greenSpriteArray[x - 1, y - 1].color = standardColor;
-            */
+            
         }
 
 
@@ -552,7 +559,7 @@ public class Grid<TGridObj>
         
 
     }
-
+    
     //Makes all tiles that are not the selected tiles the standard color
     public void TileClear(int x, int y, GameObject mouseSprite)
     {
@@ -590,11 +597,12 @@ public class Grid<TGridObj>
             }
         }
     }
+    */
 
     //This makes sure none of the tiles on the grid are still highlighted after tool placement
     public void ManualTileClear()
     {
-        
+
         for (int z = 0; z < greenSpriteArray.GetLength(0); z++)
         {
             for (int w = 0; w < greenSpriteArray.GetLength(1); w++)
