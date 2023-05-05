@@ -10,11 +10,11 @@ public class Level01Manager : MonoBehaviour
     public int goodDeeds = 105;
     [SerializeField] Text goodDeedsText;
     public GameObject toolSprite;
-    [SerializeField] float spriteDivider;
+    [SerializeField] public float spriteDivider;
     [SerializeField] TestUse gridAccess;
 
     [Header("Grid Presets")]
-    [SerializeField] GameObject[] presetSprites;
+    [SerializeField] public GameObject[] presetSprites;
 
     [Header("Available Tools")]
     public Tool[] toolsOfLevel;

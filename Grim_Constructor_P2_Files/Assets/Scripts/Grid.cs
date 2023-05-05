@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class Grid<TGridObj>
 {
     private int width, height, fontSize;
     private int[,] gridArray;
@@ -101,6 +101,29 @@ public class Grid : MonoBehaviour
         return new Vector3(x, y) * cellSize + originPosition;
     }
 
+    public void SetValue(int x, int y, int value, Shape shape)
+    {
+        List<Vector2Int> newPositions = new List<Vector2Int>();
+
+        //TileClearShape(x, y, levelManager, newPositions);
+
+        for (int i = 0; i < shape.TileIncrements.Count; i++)
+        {
+            newPositions.Add(new Vector2Int(x, y) + shape.TileIncrements[i]);
+        }
+
+        foreach (Vector2Int pos in newPositions)
+        {
+            if (gridArray[pos.x, pos.y] == 0)
+            {
+                gridArray[pos.x, pos.y] = value;
+                debugTextArray[pos.x, pos.y].text = gridArray[pos.x, pos.y].ToString();
+            }
+        }
+
+        //previouslyHighlighted.AddRange(newPositions);
+    }
+
     //Sets the value of the given square (For now, this is utilized for tools that occupy four tiles)
     public void SetValue(int x, int y, int value)
     {
@@ -129,13 +152,47 @@ public class Grid : MonoBehaviour
 
     //Takes position clicked on by mouse and the new value, changes the position into a gridArray index and
     //calls the original SetValue method that changes the value of that index and the TextMesh
-    public void SetValue(Vector3 worldPosition, int value)
+    public void SetValue(Vector3 worldPosition, int value, Level01Manager levelManager)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);
-        SetValue(x, y, value);
+        SetValue(x, y, value, levelManager.toolToBePlaced.shape);
     }
 
+    public void SetValueForPreset(GameObject sprite, Vector3 worldPosition, int value, Level01Manager levelManager)
+    {
+        int x, y;
+        GetXY(worldPosition, out x, out y);
+        SetValueForPreset(x, y, value, levelManager, sprite);
+    }
+
+    public void SetValueForPreset(int x, int y, int value, Level01Manager levelManager, GameObject sprite)
+    {
+
+        switch (sprite.GetComponent<SpriteRenderer>().sprite.name)
+        {
+            case "BridgeC1_0":
+                gridArray[x, y] = value;
+                gridArray[x, y - 1] = value;
+                gridArray[x - 1, y] = value;
+                debugTextArray[x, y].text = gridArray[x, y].ToString();
+                debugTextArray[x, y - 1].text = gridArray[x, y - 1].ToString();
+                debugTextArray[x - 1, y].text = gridArray[x - 1, y].ToString();
+                break;
+            case "BridgeB1_0":
+                gridArray[x, y] = value;
+                gridArray[x, y - 1] = value;
+                debugTextArray[x, y].text = gridArray[x, y].ToString();
+                debugTextArray[x, y - 1].text = gridArray[x, y - 1].ToString();
+                break;
+            default:
+                gridArray[x, y] = 2;
+                debugTextArray[x, y].text = gridArray[x, y].ToString();
+                break;
+
+
+        }
+    }
     //Gets value of a tile in the grid
     public int GetValue(int x, int y)
     {

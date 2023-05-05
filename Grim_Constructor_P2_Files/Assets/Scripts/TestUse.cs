@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class TestUse : MonoBehaviour
 {
-    private Grid grid;
+    private Grid<int> grid;
     [Header("Grid Specs")]
     public int width, height, fontSize, cellSize;
     public Vector3 origin = new Vector3(0,0,0);
@@ -64,7 +64,7 @@ public class TestUse : MonoBehaviour
     {
         //loadBarScript = loadBar.GetComponent<LoadBar>();
         //This line creates the actual grid. The user gives data involving the shape, the text, and colors of the grid.
-        grid = new Grid(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, 
+        grid = new Grid<int>(width, height, fontSize, cellSize, origin, square, colorOfLines, squareSpriteSortingOrder, 
             toolSpriteSortingOrder, standardColor, occupiedColor, availableColor, level01Manager);
         //clicked = false;
         //orignalSprite = mouseSprite;
@@ -113,7 +113,7 @@ public class TestUse : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && mouseSprite != null && grid.GetValue(mousePosition) == 0 && level01Manager.goodDeeds > 0)
         {
             Debug.Log("Clicking");
-            grid.SetValue(mousePosition, level01Manager.toolToBePlaced.gridPlacementValue);
+            grid.SetValue(mousePosition, level01Manager.toolToBePlaced.gridPlacementValue, level01Manager);
             level01Manager.ToolDeduction(level01Manager.toolToBePlaced);
             level01Manager.toolSprite = null;
             CallManualTileClear();
@@ -212,7 +212,9 @@ public class TestUse : MonoBehaviour
 
         grid.GetXY(spriteObj.transform.position, out x, out y);
         spriteObj.transform.position = new Vector3(x, y, 0);
-        grid.SetValue(spriteObj.transform.position, 1);
+        //spriteObj.transform.localScale = new Vector3(spriteObj.transform.localScale.x * (1 / 3), 1 / 3, 1 / 3);
+        spriteObj.transform.localScale /= (level01Manager.spriteDivider-1.65f);
+        grid.SetValueForPreset(spriteObj, spriteObj.transform.position, 1, level01Manager);
 
     }
 

@@ -16,7 +16,7 @@ public class Tool : ScriptableObject
     public int[] tileIncrementsY;
     public Dictionary<int, int> tileIncrementsCoordinates;
     public Shape shape;
-
+    public Vector2Int[] positions;
     private void Awake()
     {
         for (int i = 0; i < tileIncrementsX.Length; i++) {
